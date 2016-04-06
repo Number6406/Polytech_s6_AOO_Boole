@@ -1,4 +1,4 @@
-public class Non implements $Transformateur {
+public class Non extends $Transformateur {
 	
 	public Non(){
 		etat = "NON";
