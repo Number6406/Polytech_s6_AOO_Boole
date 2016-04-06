@@ -1,4 +1,4 @@
-public class Ou implements $Transformateur {
+public class Ou extends $Transformateur {
 	
 	public Ou(){
 		etat = "OU";
