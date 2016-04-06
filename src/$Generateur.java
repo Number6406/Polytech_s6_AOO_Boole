@@ -5,6 +5,4 @@ public abstract class $Generateur extends $Composant {
 	
 	public String etatGenerateur();
 	
-	public Generateur(int nbPortSortie, String nom, String etat, int num);
-	
 }
