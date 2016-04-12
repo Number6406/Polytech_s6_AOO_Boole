@@ -1,6 +1,6 @@
 
 public abstract class $Transformateur extends $Composant {
 
-	private String etat;
+	protected String etat;
 	
 }

@@ -1,6 +1,6 @@
 public class Non extends $Transformateur {
 	
 	public Non(){
-		etat = "NON";
+		this.etat = "NON";
 	}
 }

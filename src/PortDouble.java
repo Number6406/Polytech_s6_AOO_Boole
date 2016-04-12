@@ -4,14 +4,25 @@ public class PortDouble extends $Port {
 	private boolean libreEntree;
 	private boolean libreSortie;
 	
-	public PortDouble(boolean libreEntree, boolean libreSortie);
+	public PortDouble(boolean libreEntree, boolean libreSortie) {
+		this.libreEntree = libreEntree;
+		this.libreSortie = libreSortie;
+	}
 	
-	public void libererEntree();
+	public void libererEntree() {
+		this.libreEntree = true;
+	}
 	
-	public void reserverEntree();
+	public void reserverEntree() {
+		this.libreEntree = false;
+	}
 	
-	public void libererSortie();
+	public void libererSortie() {
+		this.libreSortie = true;
+	}
 	
-	public void reserverSortie();
+	public void reserverSortie() {
+		this.libreSortie = false;
+	}
 	
 }

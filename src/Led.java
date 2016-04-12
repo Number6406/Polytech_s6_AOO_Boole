@@ -3,6 +3,6 @@ package src;
 public class Led extends $Recepteur{
 	
 	public Led(){
-		etat = "LED";
+		this.etat = "LED";
 	}
 }

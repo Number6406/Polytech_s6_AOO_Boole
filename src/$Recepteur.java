@@ -1,8 +1,10 @@
 
 public abstract class $Recepteur extends $Composant {
 
-	private String etat;
+	protected String etat;
 
-	public String etatRecepteur();
+	public String etatRecepteur() {
+		return this.etat;
+	}
 	
 }

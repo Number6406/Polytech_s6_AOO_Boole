@@ -1,8 +1,10 @@
 
 public abstract class $Generateur extends $Composant {
 
-	private String etat;
+	protected String etat;
 	
-	public String etatGenerateur();
+	public String etatGenerateur() {
+		return this.etat;
+	}
 	
 }

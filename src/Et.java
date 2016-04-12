@@ -1,6 +1,6 @@
 public class Et extends $Transformateur {
 	
 	public Et(){
-		etat = "ET";
+		this.etat = "ET";
 	}
 }
