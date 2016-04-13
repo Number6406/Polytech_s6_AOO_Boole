@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import jus.util.assertion.Ensure;
 import jus.util.assertion.Invariant;
+import jus.util.assertion.Require;
 
 /**
  * @author alicia
@@ -27,11 +29,40 @@ public class Et extends $Transformateur {
 	}
 	
 	/**
-	 * 
+	 * Mets à jour les ports de sortie du composant, ainsi que les ports d'entrées auxquels ce dernier est connecté
+	 * @require PortsConnectes : !(listeEntrees.get(1).estLibre()||listeEntrees.get(2).estLibre())
+	 * @ensure EntreesRemplies : forall(PortEntree portEntree : listeSorties.get("premier port de sortie")) !(portEntree.estLibre())
 	 */
-	void calculer(){
-		boolean res = ((ArrayList<PortEntree>)listeEntrees).get(1).get() && ((ArrayList<PortEntree>)listeEntrees).get(2).get(); 
-		((TreeMap<PortSortie,ArrayList<PortEntree>>)listeSorties).firstKey().majValeur(res);;
+	void calculer() throws Require{
+		// REQUIRE
+		if(!(!(listeEntrees.get(1).estLibre()||listeEntrees.get(2).estLibre()))){
+			throw new Require("PortsConnectes");
+		}
+		boolean res, ensure;
+		ArrayList<PortEntree> destinations, entrees;
+		TreeMap<PortSortie,ArrayList<PortEntree>> sorties;
+		// On caste les listes dans le format choisit
+		entrees = ((ArrayList<PortEntree>)listeEntrees);
+		sorties = ((TreeMap<PortSortie,ArrayList<PortEntree>>)listeSorties);
+		
+		// Le booleen prends la valeur du port1 & port2
+		res = entrees.get(1).obtenirValeur() && entrees.get(2).obtenirValeur(); 
+		
+		sorties.firstKey().majValeur(res);
+		destinations = sorties.firstEntry().getValue();
+		for (PortEntree portEntree : destinations) {
+			portEntree.reserver();
+			portEntree.majValeur(res);
+		}
+	
+		// ENSURE
+		ensure = true;
+		for (PortEntree portEntree : destinations) {
+			ensure = ensure && !(portEntree.estLibre());
+		}
+		if(!(ensure)){ throw new Ensure("EntreesRemplies");}
+		
+		_invariant();
 	}
 	
 	void _invariant() throws Invariant{
