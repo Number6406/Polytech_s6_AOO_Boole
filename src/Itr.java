@@ -2,6 +2,6 @@
 public class Itr extends $Generateur{
 	
 	public Itr(){
-		this.etat = "ITR";
+		this.nomType = "ITR";
 	}
 }

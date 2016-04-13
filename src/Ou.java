@@ -1,6 +1,6 @@
 public class Ou extends $Transformateur {
 	
 	public Ou(){
-		this.etat = "OU";
+		this.nomType = "OU";
 	}
 }
