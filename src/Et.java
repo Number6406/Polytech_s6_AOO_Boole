@@ -15,16 +15,16 @@ public class Et extends $Transformateur {
 	 * Constructeur de la classe ET.
 	 * Remplit la liste d'entrée avec 2 ports non connectés
 	 * Remplit la liste de sortie avec un port de sortie connecté à une liste de ports d'entrée vide
-	 * @Ensure ETcomplet : this.nombreEntrees() ==2 && this.nombreSorties()==1
+	 * @Ensure ETcomplet : this.nombreEntrees() == 2 && this.nombreSorties()== 1
 	 */
 	public Et() throws Invariant{
 		this.nomType = "ET";
 		this.listeEntrees = new ArrayList<PortEntree>();
-		this.listeSorties = new TreeMap<PortSortie,ArrayList<PortEntree>>();
+		this.listeSorties = new ArrayList<PortSortie>();
 		
 		this.listeEntrees.add(new PortEntree());
 		this.listeEntrees.add(new PortEntree());
-		this.listeSorties.put(new PortSortie(), null);
+		this.listeSorties.add(new PortSortie());
 		_invariant();
 	}
 	
@@ -38,18 +38,19 @@ public class Et extends $Transformateur {
 		if(!(!(listeEntrees.get(1).estLibre()||listeEntrees.get(2).estLibre()))){
 			throw new Require("PortsConnectes");
 		}
+		
 		boolean res, ensure;
 		ArrayList<PortEntree> destinations, entrees;
-		TreeMap<PortSortie,ArrayList<PortEntree>> sorties;
+		ArrayList<PortSortie> sorties;
 		// On caste les listes dans le format choisit
 		entrees = ((ArrayList<PortEntree>)listeEntrees);
-		sorties = ((TreeMap<PortSortie,ArrayList<PortEntree>>)listeSorties);
+		sorties = ((ArrayList<PortSortie>)listeSorties);
 		
 		// Le booleen prends la valeur du port1 & port2
 		res = entrees.get(1).obtenirValeur() && entrees.get(2).obtenirValeur(); 
 		
-		sorties.firstKey().majValeur(res);
-		destinations = sorties.firstEntry().getValue();
+		sorties.get(1).majValeur(res);
+		destinations = sorties.get(1).getentrees();
 		for (PortEntree portEntree : destinations) {
 			portEntree.reserver();
 			portEntree.majValeur(res);
