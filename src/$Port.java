@@ -7,4 +7,9 @@ public abstract class $Port {
 		this.valeur = newVal;
 	}
 	
+	public boolean obtenirValeur()
+	{
+		return valeur;
+	}
+	
 }
