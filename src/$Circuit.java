@@ -8,7 +8,7 @@ public abstract class $Circuit implements _Circuit {
 		return "";
 	}
 	
-	public $Composant ajouter($Composant nouveauComposant) {
+	public void ajouter($Composant nouveauComposant) {
 		
 		listeOperateur.add(nouveauComposant);
 		
