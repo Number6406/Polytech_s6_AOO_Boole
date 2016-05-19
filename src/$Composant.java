@@ -4,8 +4,8 @@ import java.util.Map;
 
 public abstract class $Composant {
 
-	protected Map<PortSortie, ArrayList<PortEntree>> listeSorties;
-	protected List<PortEntree> listeEntrees;
+	protected Map<Integer, PortSortie> listeSorties;
+	protected Map<Integer, PortEntree> listeEntrees;
 	protected String nomType;
 	
 
@@ -21,4 +21,11 @@ public abstract class $Composant {
 	public String obtenirType(){
 		return this.nomType;
 	}
+	
+	public $Port accederPortSortie(int numPort) {
+		PortSortie portSortie = listeSorties.get(numPort);
+		/**#TODO toutes les assertions pour vérifier si le port existe**/
+		return portSortie;
+	}
+
 }
