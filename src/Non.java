@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.TreeMap;
-
-import jus.util.assertion.Ensure;
+import java.util.HashMap;
 import jus.util.assertion.Invariant;
 import jus.util.assertion.Require;
 
@@ -19,55 +16,48 @@ public class Non extends $Transformateur {
 	 */
 	public Non(){
 		this.nomType = "NON";
-		this.listeEntrees = new ArrayList<PortEntree>();
-		this.listeSorties = new ArrayList<PortSortie>();
+		this.listeEntrees = new HashMap<Integer,PortEntree>();
+		this.listeSorties = new HashMap<Integer,PortSortie>();
 		
-		this.listeEntrees.add(new PortEntree());
-		this.listeSorties.add(new PortSortie());
+		this.listeEntrees.put(0, new PortEntree());
+		this.listeSorties.put(0, new PortSortie());
 		_invariant();
 	}
 	
 	/**
 	 * Mets à jour les ports de sortie du composant, ainsi que les ports d'entrées auxquels ce dernier est connecté
-	 * @require PortsConnectes : !(listeEntrees.get(1).estLibre())
+	 * @require PortsConnectes : !(listeEntrees.get(0).estLibre())
 	 * @ensure EntreesRemplies : forall(PortEntree portEntree : listeSorties.get("premier port de sortie")) !(portEntree.estLibre())
 	 */
 	void calculer() throws Require{
 		// REQUIRE
-		if(!(!(listeEntrees.get(1).estLibre()){
-			throw new Require("PortsConnectes");
+		if(!(listeEntrees.get(0).estLibre())){
+			throw new Require("Non : PortsEntree non Connectes");
 		}
 		
-		boolean res, ensure;
-		ArrayList<PortEntree> destinations, entrees;
-		ArrayList<PortSortie> sorties;
-		// On caste les listes dans le format choisit
-		entrees = ((ArrayList<PortEntree>)listeEntrees);
-		sorties = ((ArrayList<PortSortie>)listeSorties);
+		boolean res;
+		// Le booleen prends la valeur inverse du port1 
+		res = !(this.listeEntrees.get(0).obtenirValeur());
+		this.listeSorties.get(0).majValeur(res);
 		
-		// Le booleen prends la valeur du port1 & port2
-		res = !(entrees.get(1).obtenirValeur());
-		
-		sorties.get(1).majValeur(res);
-		destinations = sorties.get(1).getEntrees();
-		for (PortEntree portEntree : destinations) {
-			portEntree.reserver();
+		listeSorties.get(0).getentrees().forEach(portEntree -> {
 			portEntree.majValeur(res);
-		}
-	
-		// ENSURE
+			portEntree.reserver(); //#TODO Pas sur que se soit utile de reserver le port...
+		});
+		
+		/*// ENSURE
 		ensure = true;
 		for (PortEntree portEntree : destinations) {
 			ensure = ensure && !(portEntree.estLibre());
 		}
-		if(!(ensure)){ throw new Ensure("EntreesRemplies");}
+		if(!(ensure)){ throw new Ensure("EntreesRemplies");}*/
 		
 		_invariant();
 	}
 	
 	void _invariant() throws Invariant{
 		if(!( this.nombreEntrees() == 1 && this.nombreSorties() == 1)){
-			throw new Invariant("NONcomplet");
+			throw new Invariant("NON : invariant");
 		}
 	}
 }

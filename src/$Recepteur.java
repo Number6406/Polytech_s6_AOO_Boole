@@ -1,9 +1,9 @@
 
 public abstract class $Recepteur extends $Composant {
 
-	protected String etat;
+	protected boolean etat;
 
-	public String etatRecepteur() {
+	public boolean etatRecepteur() {
 		return this.etat;
 	}
 	

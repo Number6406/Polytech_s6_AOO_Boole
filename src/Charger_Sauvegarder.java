@@ -1,10 +1,10 @@
 public class Charger_Sauvegarder {
-	public static $Circuit lireUnFichier(String nomFichier)
+	public static Circuit lireUnFichier(String nomFichier)
 	{
 		return null;
 	}
 	
-	public static void ecrireUnCircuit($Circuit c, String nomFichier)
+	public static void ecrireUnCircuit(Circuit c, String nomFichier)
 	{
 		
 	}

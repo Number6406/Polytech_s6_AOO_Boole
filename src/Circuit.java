@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,11 @@ public class Circuit implements _Circuit {
 
 	public String toString() {
 		return "";
+	}
+	
+	public Circuit()
+	{
+		listeOperateur = new HashMap<Integer,$Composant>(); //#TODO a verifier le type, mais il faut l'initialiser qqpart...
 	}
 
 	/**
@@ -40,8 +46,23 @@ public class Circuit implements _Circuit {
 	
 	public boolean evaluable()
 	{
-		//this.listeOperateur.forEach((k,v)-> if(v.));
-		return false;
+		for (Map.Entry<Integer, $Composant> entry : listeOperateur.entrySet()) {
+		    int nbPortEntree = entry.getValue().nombreEntrees();
+		    int nbPortSortie = entry.getValue().nombreSorties();
+		    PortEntree pE;
+		    for (int i =0; i< nbPortEntree; i++)
+		    {
+		    	pE = entry.getValue().listeEntrees.get(i);
+		    	if (pE.estLibre()) return false;
+		    }
+		    PortSortie pS;
+		    for (int i =0; i< nbPortSortie; i++)
+		    {
+		    	pS = entry.getValue().listeSorties.get(i);
+		    	if (pS.estLibre()) return false;
+		    }
+		}
+		return true;
 	}
 
 }

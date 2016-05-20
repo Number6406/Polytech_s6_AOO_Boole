@@ -12,7 +12,7 @@ public class PortSortie extends $Port
 	{
 		this.majValeur(false);
 		this.liberer();
-		this.listeEntree = null;
+		this.listeEntree = new ArrayList<PortEntree>();
 	}
 	
 	public PortSortie(boolean val, boolean l , ArrayList<PortEntree> liste)
