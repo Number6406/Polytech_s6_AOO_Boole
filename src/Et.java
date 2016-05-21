@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 import jus.util.assertion.Invariant;
 import jus.util.assertion.Require;
 
@@ -16,12 +16,12 @@ public class Et extends $Transformateur {
 	 */
 	public Et() throws Invariant{
 		this.nomType = "ET";
-		this.listeEntrees = new HashMap<Integer,PortEntree>();
-		this.listeSorties = new HashMap<Integer,PortSortie>();
+		this.listeEntrees = new ArrayList<PortEntree>();
+		this.listeSorties = new ArrayList<PortSortie>();
 		
-		this.listeEntrees.put(0,new PortEntree());
-		this.listeEntrees.put(1,new PortEntree());
-		this.listeSorties.put(0,new PortSortie());
+		this.listeEntrees.add(0,new PortEntree());
+		this.listeEntrees.add(1,new PortEntree());
+		this.listeSorties.add(0,new PortSortie());
 		_invariant();
 	}
 	
@@ -41,7 +41,8 @@ public class Et extends $Transformateur {
 		res = (this.listeEntrees.get(0).obtenirValeur())&&(this.listeEntrees.get(1).obtenirValeur());
 		this.listeSorties.get(0).majValeur(res);
 		
-		listeSorties.get(0).getentrees().forEach(portEntree -> {
+
+		listeSorties.get(0).getEntrees().forEach(portEntree -> {
 			portEntree.majValeur(res);
 			portEntree.reserver(); //#TODO Pas sur que se soit utile de reserver le port...
 		});
