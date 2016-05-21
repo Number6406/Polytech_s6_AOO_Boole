@@ -88,5 +88,14 @@ public class Circuit implements _Circuit {
 		}
 		return true;
 	}
+	
+	public $Composant getComposant(int i)
+	{
+		for(Map.Entry<Integer, $Composant> entry : this.listeOperateur.entrySet())
+		{
+			if(entry.getKey()==i){return entry.getValue();}
+		}
+		return null;
+	}
 
 }
