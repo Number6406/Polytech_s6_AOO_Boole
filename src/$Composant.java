@@ -1,6 +1,6 @@
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import jus.util.assertion.Require;
 
 public abstract class $Composant {
 
@@ -22,9 +22,16 @@ public abstract class $Composant {
 		return this.nomType;
 	}
 	
+	
+	/**
+	 * @require PortExiste : numPort >= 0 && numPort < listeSorties.size()
+	 * @param numPort : Le numéro de port voulu
+	 * @return le PortSortie associé s'il existe
+	 */
 	public $Port accederPortSortie(int numPort) {
+		//Require
+		if(!(numPort >= 0 && numPort < listeSorties.size())) throw new Require("PortExiste");
 		PortSortie portSortie = listeSorties.get(numPort);
-		/**#TODO toutes les assertions pour v�rifier si le port existe**/
 		return portSortie;
 	}
 

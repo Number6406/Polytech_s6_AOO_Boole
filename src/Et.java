@@ -50,7 +50,7 @@ public class Et extends $Transformateur {
 		res = entrees.get(1).obtenirValeur() && entrees.get(2).obtenirValeur(); 
 		
 		sorties.get(1).majValeur(res);
-		destinations = sorties.get(1).getentrees();
+		destinations = sorties.get(1).getEntrees();
 		for (PortEntree portEntree : destinations) {
 			portEntree.reserver();
 			portEntree.majValeur(res);

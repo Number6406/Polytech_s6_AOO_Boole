@@ -55,7 +55,7 @@ public class PortSortie extends $Port
 		return this.listeEntree.get(indice);
 	}
 	
-	public ArrayList<PortEntree> getentrees()
+	public ArrayList<PortEntree> getEntrees()
 	{
 		return this.listeEntree;
 	}
