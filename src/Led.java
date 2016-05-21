@@ -29,7 +29,7 @@ public class Led extends $Recepteur{
 	}
 	
 	void _invariant() throws Invariant{
-		if(! (listeEntrees.size() == 1) && (listeSorties.size() == 0)){ 
+		if(! ((listeEntrees.size() == 1) && (listeSorties.size() == 0)) ){ 
 			throw new Invariant("BienConstruit");
 		}
 	}
