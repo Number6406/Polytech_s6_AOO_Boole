@@ -1,19 +1,22 @@
 import java.util.ArrayList;
 
+import jus.util.assertion.Invariant;
 import jus.util.assertion.Require;
-
+/**
+ * @author alicia
+ * @invariant Bienconstruit : (listeEntrees.size() == 1) && (listeSorties.size() == 0)
+ */
 public class Led extends $Recepteur{
 	
 	public Led(){
 		this.nomType = "LED";
 		this.etat = false; //etein
-		//#TODO ne vaut-il pas mieux fair ca dans le contructeur classe mere et faire un appel a super() ?
 		this.listeEntrees = new ArrayList<PortEntree>();
-		this.listeSorties = new ArrayList<PortSortie>();; //#TODO je sais pas si vaut meiux ca ou une map vide
+		this.listeSorties = new ArrayList<PortSortie>();
 		
 		this.listeEntrees.add(0, new PortEntree());
 		
-		//#TODO invariant
+		_invariant();
 	}
 	
 	void calculer() throws Require{
@@ -23,5 +26,11 @@ public class Led extends $Recepteur{
 		
 		this.etat = listeEntrees.get(0).obtenirValeur();
 		
+	}
+	
+	void _invariant() throws Invariant{
+		if(! (listeEntrees.size() == 1) && (listeSorties.size() == 0)){ 
+			throw new Invariant("BienConstruit");
+		}
 	}
 }
