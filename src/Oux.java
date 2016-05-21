@@ -32,7 +32,7 @@ public class Oux extends $Transformateur {
 	 */
 	public void calculer() throws Require{
 		// REQUIRE
-		if(!(listeEntrees.get(0).estLibre()||listeEntrees.get(1).estLibre())){
+		if((listeEntrees.get(0).estLibre()||listeEntrees.get(1).estLibre())){
 			throw new Require(" OUX : Ports non Connectes");
 		}
 		
@@ -40,14 +40,13 @@ public class Oux extends $Transformateur {
 		boolean v1,v2;
 		v1 = (this.listeEntrees.get(0).obtenirValeur());
 		v2 = (this.listeEntrees.get(1).obtenirValeur());
-		// Le booleen prends la valeur port1&&port2
+		// Le booleen prends la valeur port1 oux port2
 		res = (v1||v2)&&(!(v1&&v2));
 		this.listeSorties.get(0).majValeur(res);
 		
 
 		listeSorties.get(0).getEntrees().forEach(portEntree -> {
 			portEntree.majValeur(res);
-			portEntree.reserver(); //#TODO Pas sur que se soit utile de reserver le port...
 		});
 	
 //		// ENSURE

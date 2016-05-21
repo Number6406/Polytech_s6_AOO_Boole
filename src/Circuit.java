@@ -46,7 +46,14 @@ public class Circuit implements _Circuit {
 	 */
 	public void connecter(int numComposantSortie, int numPortSortie, int numComposantEntree, int numPortEntree){
 		
-		if(!(numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie < listeOperateur.size() && numComposantEntree < listeOperateur.size())) {
+		//Cette assertion ne fonctionne pas, si on veut avoir les numeros qu'on veut.
+		//Cette assertion ne fonctionne pas, si on veut avoir des numeros de composants qui commencent a 1
+//		if(!(numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie < listeOperateur.size() && numComposantEntree < listeOperateur.size())) {
+//			throw new Require("ComposantsExistent");
+//		}
+		
+		//celle ci prend en compte si les composant commence a 1 et se suivent (mais ne verifie pas qu'ils se suivent)
+		if(!(numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie <= listeOperateur.size() && numComposantEntree <= listeOperateur.size())) {
 			throw new Require("ComposantsExistent");
 		}
 		

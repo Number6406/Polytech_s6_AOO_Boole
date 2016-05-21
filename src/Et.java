@@ -32,19 +32,19 @@ public class Et extends $Transformateur {
 	 */
 	public void calculer() throws Require{
 		// REQUIRE
-		if(!(listeEntrees.get(0).estLibre()||listeEntrees.get(1).estLibre())){
+		if((listeEntrees.get(0).estLibre()||listeEntrees.get(1).estLibre())){
 			throw new Require(" ET : Ports non Connectes");
 		}
 		
 		boolean res;
 		// Le booleen prends la valeur port1&&port2
 		res = (this.listeEntrees.get(0).obtenirValeur())&&(this.listeEntrees.get(1).obtenirValeur());
-		this.listeSorties.get(0).majValeur(res);
 		
-
+		//Mise a jour du port de sortie
+		this.listeSorties.get(0).majValeur(res);
+		//Mise a jour de la valeur des ports connecte aux ports de sortie
 		listeSorties.get(0).getEntrees().forEach(portEntree -> {
 			portEntree.majValeur(res);
-			portEntree.reserver(); //#TODO Pas sur que se soit utile de reserver le port...
 		});
 	
 //		// ENSURE

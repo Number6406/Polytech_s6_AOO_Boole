@@ -42,7 +42,6 @@ public class Non extends $Transformateur {
 		
 		listeSorties.get(0).getEntrees().forEach(portEntree -> {
 			portEntree.majValeur(res);
-			portEntree.reserver(); //#TODO Pas sur que se soit utile de reserver le port...
 		});
 		
 		/*// ENSURE

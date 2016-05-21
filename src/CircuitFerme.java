@@ -1,8 +1,3 @@
-
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import jus.util.assertion.Require;
 
 public class CircuitFerme extends Circuit {
@@ -15,31 +10,64 @@ public class CircuitFerme extends Circuit {
 	}
 	public boolean evaluer() {
 		//#TODO Attention a l'ordre des composants !!!
+		//#TODO chercher les cas d'erreurs !
 		//Normalement si on est ici c'est que le circuit est evaluable
 		
-		//On creer deux tableaux pour avoir les nb entree et nb sortie de chaque composant
-		ArrayList<Integer> nbEntree = new ArrayList<Integer>(); 
-		ArrayList<Integer> nbSortie = new ArrayList<Integer>();
+		//On creer deux tableaux pour avoir les nb entree de chaque composant
+		int nbEntree[] = new int[listeOperateur.size()+1]; 
+		for (int i = 0; i < nbEntree.length; i++) {
+			nbEntree[i] = -1;
+		}
 		
 		listeOperateur.forEach((k,v) -> {
-			nbEntree.add(k,v.nombreEntrees());
-			nbSortie.add(k,v.nombreSorties());
+			nbEntree[k] = v.nombreEntrees();
 		});
 		
 		//On parcours le tableau a la recherche d'un generateur (pas d'entrée)
 		int i;
-		for(i=0;i<nbEntree.size();i++)
+		for(i=0;i<nbEntree.length;i++)
 		{
-			if(nbEntree.get(i)==0) break;
+			if(nbEntree[i]==0) break;
 		}
-		if(i==nbEntree.size()) return false; //Pas de point de départ
-		//On a maintenant un point de depart
-		$Composant composantCourant = listeOperateur.get(i);
-		composantCourant.c
+		if(i==nbEntree.length) return false; //Pas de point de départ
+		//---------------
+		int indice;
+		while(!toutCalcule(nbEntree))
+		{
+			for(indice = 0; indice<nbEntree.length;indice ++)
+			{
+				if(nbEntree[indice]==0)
+				{
+					listeOperateur.get(indice).calculer();
+					
+					for(PortSortie pS : listeOperateur.get(indice).listeSorties)
+					{
+						for(PortEntree pE : pS.getEntrees())
+						{
+							nbEntree[pE.obtenirNumComposant()] =  nbEntree[pE.obtenirNumComposant()] -1;
+						}
+					}
+					
+					nbEntree[indice] =  -1;
+				}
+			}
+		}
 		
 		return true;
 	}
 	
+	private boolean toutCalcule(int[] entree)
+	{
+		for(int valeur : entree)
+		{
+			if(valeur!=-1) return false;
+		}
+		return true;
+	}
+	
+	
 	//#TODO Invariant : modification -> toujours evaluable
+	
+	
 
 }

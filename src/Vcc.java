@@ -26,9 +26,16 @@ public class Vcc extends $Generateur{
 		if(!(listeSorties.size() > 0)){
 			throw new Require("Vcc : Port de Sortie non existant");
 		}
-		PortSortie p = this.listeSorties.get(0);
-		p.majValeur(this.etatGenerateur());
-		this.listeSorties.add(0, p);
+		boolean res;
+		// Le booleen prends la valeur port1&&port2
+		res = this.etatGenerateur();
+		
+		//Mise a jour du port de sortie
+		this.listeSorties.get(0).majValeur(res);
+		//Mise a jour de la valeur des ports connecte aux ports de sortie
+		listeSorties.get(0).getEntrees().forEach(portEntree -> {
+			portEntree.majValeur(res);
+		});
 	}
 	
 	void _invariant() throws Invariant{

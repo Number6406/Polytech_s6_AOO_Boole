@@ -32,7 +32,7 @@ public class Ou extends $Transformateur {
 	 */
 	public void calculer() throws Require{
 		// REQUIRE
-		if(!(listeEntrees.get(0).estLibre()||listeEntrees.get(1).estLibre())){
+		if((listeEntrees.get(0).estLibre()||listeEntrees.get(1).estLibre())){
 			throw new Require(" OU : Ports non Connectes");
 		}
 		
@@ -44,7 +44,6 @@ public class Ou extends $Transformateur {
 
 		listeSorties.get(0).getEntrees().forEach(portEntree -> {
 			portEntree.majValeur(res);
-			portEntree.reserver(); //#TODO Pas sur que se soit utile de reserver le port...
 		});
 	
 //		// ENSURE
