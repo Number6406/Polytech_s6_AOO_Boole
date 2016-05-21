@@ -26,6 +26,7 @@ public class PortSortie extends $Port
 	public void add(PortEntree e)
 	{this.listeEntree.add(e);}
 	
+	//#TODO vérifier que le port est dans la liste (si i==taille retrouner une erreur)
 	public PortEntree enleverUneSortie(PortEntree e)
 	{
 		PortEntree p;

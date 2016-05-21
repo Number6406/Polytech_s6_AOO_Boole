@@ -23,6 +23,12 @@ public class Circuit implements _Circuit {
 	 * @param numeroComposant
 	 */
 	public void ajouter($Composant nouveauComposant, int numeroComposant) {
+		nouveauComposant.listeEntrees.forEach((port) -> {
+			port.ajouterNumComposant(numeroComposant);
+		});
+		nouveauComposant.listeSorties.forEach(port -> {
+			port.ajouterNumComposant(numeroComposant);
+		});
 		listeOperateur.put(numeroComposant, nouveauComposant);
 	}
 

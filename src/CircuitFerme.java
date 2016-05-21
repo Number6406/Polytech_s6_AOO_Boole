@@ -12,6 +12,8 @@ public class CircuitFerme extends Circuit {
 	}
 	public boolean evaluer() {
 		//#TODO Attention a l'ordre des composants !!!
+		//Normalement si on est ici c'est que le circuit est evaluable
+		
 		return false;
 	}
 	
