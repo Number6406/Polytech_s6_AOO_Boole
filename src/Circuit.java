@@ -47,7 +47,7 @@ public class Circuit implements _Circuit {
 		$Composant composantEntree = listeOperateur.get(numComposantEntree) ;
 		
 		if(!(numPortEntree >= 0 && numPortEntree < composantEntree.listeEntrees.size())) throw new Require("PortEntreeExiste");
-		PortEntree portEntree = composantEntree.listeEntrees.get(numComposantEntree);
+		PortEntree portEntree = composantEntree.listeEntrees.get(numPortEntree);
 		
 		if(!portEntree.estLibre()) throw new Require("PortEntreeLibre");
 		portEntree.reserver();
@@ -55,8 +55,10 @@ public class Circuit implements _Circuit {
 		if(!(numPortSortie >= 0 && numPortSortie < composantSortie.listeSorties.size())) throw new Require("PortSortieExiste");
 		PortSortie portSortie = composantSortie.listeSorties.get(numPortSortie);
 		
-		if(!(portSortie.getEntrees().contains(portEntree))) throw new Require("ConnexionExistePas"); 
+		//#TODO if(!(portSortie.getEntrees().contains(portEntree))) throw new Require("ConnexionExistePas"); 
 		portSortie.add(portEntree);
+		
+		if(portSortie.estLibre()) portSortie.reserver();
 		
 	}
 	
