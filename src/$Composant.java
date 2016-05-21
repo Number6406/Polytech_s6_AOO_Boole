@@ -2,7 +2,7 @@ import java.util.List;
 
 import jus.util.assertion.Require;
 
-public abstract class $Composant {
+public abstract class $Composant implements _Composant {
 
 	protected List<PortSortie> listeSorties;
 	protected List<PortEntree> listeEntrees;
