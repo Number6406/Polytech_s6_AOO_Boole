@@ -1,4 +1,5 @@
 
-public interface _Composite {
+public interface _Composite extends _Circuit 
+{
 
 }

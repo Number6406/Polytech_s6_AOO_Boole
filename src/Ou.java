@@ -30,7 +30,7 @@ public class Ou extends $Transformateur {
 	 * @require PortsConnectes : !(listeEntrees.get(1).estLibre()||listeEntrees.get(2).estLibre())
 	 * @ensure EntreesRemplies : forall(PortEntree portEntree : listeSorties.get("premier port de sortie")) !(portEntree.estLibre())
 	 */
-	void calculer() throws Require{
+	public void calculer() throws Require{
 		// REQUIRE
 		if(!(listeEntrees.get(0).estLibre()||listeEntrees.get(1).estLibre())){
 			throw new Require(" OU : Ports non Connectes");

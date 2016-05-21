@@ -8,8 +8,6 @@ public abstract class $Composant implements _Composant {
 	protected List<PortEntree> listeEntrees;
 	protected String nomType;
 	
-
-
 	public int nombreSorties(){
 		return listeSorties.size();
 	}
@@ -22,17 +20,21 @@ public abstract class $Composant implements _Composant {
 		return this.nomType;
 	}
 	
-	
 	/**
 	 * @require PortExiste : numPort >= 0 && numPort < listeSorties.size()
 	 * @param numPort : Le numéro de port voulu
 	 * @return le PortSortie associé s'il existe
 	 */
-	public $Port accederPortSortie(int numPort) {
+	public PortSortie accederPortSortie(int numPort) {
 		//Require
 		if(!(numPort >= 0 && numPort < listeSorties.size())) throw new Require("PortExiste");
-		PortSortie portSortie = listeSorties.get(numPort);
-		return portSortie;
+		return listeSorties.get(numPort);
+	}
+	
+	public PortEntree accederPortEntre(int numPort) {
+		//Require
+		if(!(numPort >= 0 && numPort < listeEntrees.size())) throw new Require("PortExiste");
+		return listeEntrees.get(numPort);
 	}
 
 }

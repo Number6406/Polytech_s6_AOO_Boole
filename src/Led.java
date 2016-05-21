@@ -19,7 +19,7 @@ public class Led extends $Recepteur{
 		_invariant();
 	}
 	
-	void calculer() throws Require{
+	public void calculer() throws Require{
 		if(!(listeEntrees.get(0).estLibre())){
 			throw new Require("Non : PortsEntree non Connectes");
 		}

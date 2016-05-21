@@ -29,7 +29,7 @@ public class Non extends $Transformateur {
 	 * @require PortsConnectes : !(listeEntrees.get(0).estLibre())
 	 * @ensure EntreesRemplies : forall(PortEntree portEntree : listeSorties.get("premier port de sortie")) !(portEntree.estLibre())
 	 */
-	void calculer() throws Require{
+	public void calculer() throws Require{
 		// REQUIRE
 		if(!(listeEntrees.get(0).estLibre())){
 			throw new Require("Non : PortsEntree non Connectes");

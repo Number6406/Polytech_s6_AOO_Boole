@@ -64,10 +64,40 @@ public class Composite extends $Composant implements _Composite{
 	{this.circuit_interne.connecter(numComposantSortie, numPortSortie, numComposantEntree, numPortEntree);}
 
 	
-	public void getCompo(int numComposant)
-	{this.circuit_interne.getComposant(numComposant);}
+	public $Composant getComposant(int numComposant)
+	{return this.circuit_interne.getComposant(numComposant);}
 
 	public boolean evaluable(){return true;}
+
+	@Override
+	public void calculer() 
+	{
+		int i,j, nbPorts;
+		String listeEntreSortie[];
+		String val;
+		listeEntreSortie = new String[this.circuit_interne.nombreComposant()];
+		
+		for(i = 0; i <listeEntreSortie.length; i++)
+		{
+			nbPorts = this.circuit_interne.getComposant(i).nombreEntrees() + this.circuit_interne.getComposant(i).nombreSorties();
+			val = ""+this.circuit_interne.getComposant(i).nombreEntrees()+"-";
+			val = val+this.circuit_interne.getComposant(i).nombreSorties()+"-";
+			for(j = 0 ; j < nbPorts  ; j++)
+			{
+				val = val+"2";
+			}
+		}
+		
+		
+		
+		for(i = 0; i < this.listeEntrees.size(); i++)
+		{
+			this.listeEntreInterne.get(i).majValeur(this.listeEntrees.get(i).obtenirValeur());
+		}
+		
+		
+		
+	}
 
 }
 

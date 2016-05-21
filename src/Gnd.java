@@ -22,7 +22,7 @@ public class Gnd extends $Generateur{
 	}
 	
 	/* Propagation de la valeur */
-	void calculer() throws Require{
+	public void calculer() throws Require{
 		if(!(listeSorties.size() > 0)){
 			throw new Require("Gnd : Port de Sortie non existant");
 		}

@@ -13,9 +13,9 @@ SORTIE_ENTRE :"#".NUM."(".(NUM"#".NUM.[","].")"*)|"#".NUM."(".("#".NUM.[","].")"
 options{STATIC=false;}
 
 PARSER_BEGIN(Reader)
-	package jus.aoo.boole.reader;
-	import jus.aoo.boole.circuit.*;
-	public class Reader extends ReaderUtilities {
+	import java.util.TreeMap;
+	import java.util.Map;
+	public class Reader {
 		public _Circuit read() throws Exception {return CIRCUIT();}
 	}
 PARSER_END(Reader)
@@ -46,9 +46,17 @@ int Nombre() throws Exception:
 	{return  Integer.parseInt(t.image);}
 }
 
+String Nom() throws Exception:
+{
+  Token t;
+}
+{	t = <ID> 
+	{return  t.image;}
+}
+
 $Composant TYPE(String type) throws Exception:
 {
-  $Composant composant;
+  $Composant composant = null;
 }
 {
  	{
@@ -62,8 +70,8 @@ $Composant TYPE(String type) throws Exception:
  	  		case "Ou" : composant = ($Composant)new Ou();break;
  	  		case "Non" : composant = ($Composant)new Non();break;
  	  		case "Oux" : composant = ($Composant)new Oux();break;
- 	  		return composant;
  	 	}
+ 	 	return composant;
 	}
 }
 
@@ -71,23 +79,22 @@ $Composant TYPE(String type) throws Exception:
 _Circuit CIRCUIT() throws Exception:
 { /**CircuitFerme circuit*/
 	$Composant compo;
-	Ciruit circuit;
-	int indice;
+	Circuit circuit = new Circuit();
+	int indice = -1;
 	int i;
-	TreeMap <Integer,TreeMap<Integer,Integer>> sortie;
-	TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> listeConnexion;
-	String type;
+	TreeMap <Integer,TreeMap<Integer,Integer>> sortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();;
+	TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> listeConnexion = new TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>();
+	String type = "";
 }
 {
-  		{sortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();
-  		circuit = new Circuit();}
+
 		<ID>
 		<P_OUVERT>
 		(
 			(LOOKAHEAD(3)
 		  	compo = COMPOSANT(indice,sortie)|compo = COMPOSITE(indice,type, sortie))
 		  	{ listeConnexion.put(indice, sortie);
-		  	circuit.add(compo);}
+		  	circuit.ajouter(compo,indice);}
 		)*
 		<P_FERME>
 
@@ -98,14 +105,14 @@ _Circuit CIRCUIT() throws Exception:
 			for(i = 0; i <listeConnexion.size(); i++)
 			{
 				//Obtenir liste des connexion sortie
-				connexionSortie = listeConnexion.get(i);
+				sortie = listeConnexion.get(i);
 				//Pour chaque port de sortie
-				for(Map.Entry<Integer,TreeMap<Integer,Integer>> entry : connexionSortie.entrySet())
+				for(Map.Entry<Integer,TreeMap<Integer,Integer>> entry : sortie.entrySet())
 			  	{
 					//entry.getKey() = numPort de sortie
 			  	  	for(Map.Entry<Integer,Integer> entry2 : entry.getValue().entrySet())
 			  		{ //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
-					  circuit.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValues()); 
+					  circuit.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); 
 			  		}
 			  	}
 			}
@@ -130,7 +137,7 @@ $Composant COMPOSANT(int indice,TreeMap <Integer,TreeMap<Integer,Integer>> sorti
 	
 	/**type*/
 	<SEPARATEUR>
-	type = <ID>
+	type = Nom()
     compo = TYPE(type)
 
     /**Lire nombre entrée et sortie*/
@@ -142,7 +149,7 @@ $Composant COMPOSANT(int indice,TreeMap <Integer,TreeMap<Integer,Integer>> sorti
 
 	/**Lire élément facultatif*/
 	[<P_OUVERT> 
-	facutatif = <ID>
+	facultatif = Nom()
 	<P_FERME>]
 	<FLECHE>
 	{sortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();
@@ -150,6 +157,7 @@ $Composant COMPOSANT(int indice,TreeMap <Integer,TreeMap<Integer,Integer>> sorti
 	 
 	/**Les sorties*/
 	(
+	  {port = -1;}
 	  liste = ENTRE_SORTIE(port)
 	  {sortie.put(port,liste);}
 	)*
@@ -165,11 +173,10 @@ $Composant COMPOSITE(int indice,String type,TreeMap <Integer,TreeMap<Integer,Int
 {
   	int nb_sorties;
 	int nb_entrees;
-	int indiceCompo;
-	int numPort;
+	int indiceCompo = -1;
+	int numPort = 0;
 	int i;
 	
-	String type;
 	String facultatif;
 	
 	Composite compo;
@@ -191,7 +198,7 @@ $Composant COMPOSITE(int indice,String type,TreeMap <Integer,TreeMap<Integer,Int
 	
 	/**type*/
 	<SEPARATEUR> 
-    type = <ID>
+    type = Nom()
 
 	/**Lire nombre entrées et un nombre de sorie*/
 	<P_OUVERT> 
@@ -213,12 +220,12 @@ $Composant COMPOSITE(int indice,String type,TreeMap <Integer,TreeMap<Integer,Int
 
 	/**Liste des composants*/
 	( (LOOKAHEAD(3) c = COMPOSANT(indiceCompo, connexionSortie) | c = COMPOSITE(indiceCompo,type,connexionSortie))
-  	{ listeConnexion.put(indiceCompo,connexionSortie);compo.add(c,indiceCompo);})*
+  	{ listeConnexion.put(indiceCompo,connexionSortie);compo.ajouter(c,indiceCompo);})*
 	  	
 	<P_FERME>
 	/**Lire un éléments facltatif*/
 	[<P_OUVERT> 
-	facutatif = <ID>
+	facultatif = Nom()
 	<P_FERME>]
 	
 	<FLECHE>
@@ -236,9 +243,9 @@ $Composant COMPOSITE(int indice,String type,TreeMap <Integer,TreeMap<Integer,Int
 		//Connecter les port d'entrées
 		for(i = 0; i <nb_entrees; i++)
 		{
-			for(Map.Entry<Integer,Integer> entry : connexionEntre.get(i))
+			for(Map.Entry<Integer,Integer> entry : connexionEntre.get(i).entrySet())
 	  		{ 
-			 	compo.accederPortSortie(i).add(compo.getCompo(entry.getKey()).accederPortSortie(entry.getValue()));
+			 	(compo.getPortEntreInterne(i)).add(compo.getComposant(entry.getKey()).accederPortEntre(entry.getValue()));
 	  		}
 		}
 		//Lier les coposant entre eux
@@ -249,16 +256,16 @@ $Composant COMPOSITE(int indice,String type,TreeMap <Integer,TreeMap<Integer,Int
 			connexionSortie = listeConnexion.get(i);
 			
 			//Pour chaque port de sortie
-			for(Map.Entry<Interger,TreeMap<Integer,Integer>> entry : connexionSortie.entrySet())
+			for(Map.Entry<Integer,TreeMap<Integer,Integer>> entry : connexionSortie.entrySet())
 		  	{
 				//entry.getKey() = numPort de sortie
 		  	  	for(Map.Entry<Integer,Integer> entry2 : entry.getValue().entrySet())
 		  		{ //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
 		  		
 		  		  if(entry2.getKey() == -1)//Connexion sortie
-		  		  { (compo.getCompo(i).accederPortSortie(entry.getKey())).add(compo.getPortSortie(entry2.getValues())); }
+		  		  { (compo.getComposant(i).accederPortSortie(entry.getKey())).add(compo.getPortSortieInterne(entry2.getValue())); }
 		  		  //Connexion normale
-				  else { compo.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValues()); }
+				  else { compo.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
 		  		}
 		  	}
 		}
@@ -266,7 +273,7 @@ $Composant COMPOSITE(int indice,String type,TreeMap <Integer,TreeMap<Integer,Int
 	}
 }
 
-TreeMap<Interger,Interger> ENTRE_SORTIE(int port) throws Exception:
+TreeMap<Integer,Integer> ENTRE_SORTIE(int port) throws Exception:
 {
   TreeMap<Integer, Integer> listeCo;
   int numCompo2;

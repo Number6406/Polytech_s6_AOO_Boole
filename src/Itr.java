@@ -31,7 +31,7 @@ public class Itr extends $Generateur{
 	}
 	
 	/* Propagation de la valeur */
-	void calculer() throws Require{
+	public void calculer() throws Require{
 		if(!(listeSorties.size() > 0)){
 			throw new Require("Non : Port de Sortie non existant");
 		}

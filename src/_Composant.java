@@ -9,6 +9,5 @@ public interface _Composant {
 	
 	public void calculer();
 	
-	public void connecter($Port portEntree, $Port portSortie);
 	
 }

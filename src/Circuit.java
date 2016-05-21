@@ -17,6 +17,7 @@ public class Circuit implements _Circuit {
 		listeOperateur = new HashMap<Integer,$Composant>(); //#TODO a verifier le type, mais il faut l'initialiser qqpart...
 	}
 
+	
 	/**
 	 * #TODO Javadoc + test si numero composant deja pris
 	 * @param nouveauComposant
@@ -97,5 +98,9 @@ public class Circuit implements _Circuit {
 		}
 		return null;
 	}
+	
+	public int nombreComposant()
+	{return this.listeOperateur.size();}
+
 
 }

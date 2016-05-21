@@ -63,9 +63,4 @@ public class Et extends $Transformateur {
 		}
 	}
 
-	@Override
-	public void connecter($Port portEntree, $Port portSortie) {
-		// TODO Auto-generated method stub
-		
-	}
 }
