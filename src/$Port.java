@@ -3,6 +3,7 @@ public abstract class $Port implements _Port {
 	private boolean valeur;
 	private boolean libre;
 	private int numComposant;
+	protected int numero;
 	
 	public void majValeur(boolean val)
 	{
@@ -37,6 +38,11 @@ public abstract class $Port implements _Port {
 	public void ajouterNumComposant(int c)
 	{
 		this.numComposant = c;
+	}
+	
+	public int getNumPort()
+	{
+		return this.numero;
 	}
 	
 }

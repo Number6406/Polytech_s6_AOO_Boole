@@ -16,7 +16,7 @@ public class Itr extends $Generateur{
 		this.listeEntrees = new ArrayList<PortEntree>();
 		this.listeSorties = new ArrayList<PortSortie>();
 		
-		this.listeSorties.add(0, new PortSortie());
+		this.listeSorties.add(0, new PortSortie(1));
 		
 		_invariant();
 	}

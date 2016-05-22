@@ -7,10 +7,6 @@ import jus.util.assertion.*;
 public class Circuit implements _Circuit {
 
 	Map<Integer,$Composant> listeOperateur;
-
-	public String toString() {
-		return "";
-	}
 	
 	public Circuit()
 	{
@@ -109,5 +105,16 @@ public class Circuit implements _Circuit {
 	public int nombreComposant()
 	{return this.listeOperateur.size();}
 
-
+	public String toString() 
+	{
+		int i;
+		String listeCompo, debutCiruit;
+		debutCiruit = "Nom[";
+		listeCompo = "";
+		for(Map.Entry<Integer,$Composant> entry : this.listeOperateur.entrySet())
+		{
+			listeCompo = listeCompo + "<"+entry.getKey()+"|"+entry.getValue().toString()+">\n";
+		}
+		return debutCiruit+"\n"+listeCompo+"]";
+	}
 }

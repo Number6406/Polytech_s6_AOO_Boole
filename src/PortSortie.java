@@ -8,19 +8,21 @@ public class PortSortie extends $Port
 	private ArrayList<PortEntree> listeEntree;
 	
 	/**@ensure : PortLibre libre = true & listeEntree = null*/
-	public PortSortie()
+	public PortSortie(int num)
 	{
 		this.majValeur(false);
 		this.liberer();
 		this.listeEntree = new ArrayList<PortEntree>();
+		this.numero = num;
 	}
 	
-	public PortSortie(boolean val, boolean l , ArrayList<PortEntree> liste)
+	public PortSortie(boolean val, boolean l , ArrayList<PortEntree> liste, int num)
 	{
 		this.majValeur(val);
 		if(l){this.liberer();}
 		else{this.reserver();}
 		this.listeEntree = liste;
+		this.numero = num;
 	}
 	
 	public void add(PortEntree e)
@@ -61,15 +63,22 @@ public class PortSortie extends $Port
 		return this.listeEntree;
 	}
 	
+	public int getNombreEntrees()
+	{
+		return this.listeEntree.size();
+	}
+	
 	// Affiche la liste des composants auxquels le port de sortie est connecté
 	//TODO ajouter le numéro de port d'entrée à un port pour la représentation textuelle
 	public String toString(){
 		String s = "(";
 		int i;
-		for (i=0;i<listeEntree.size()-1;i++) {
-			s = s + listeEntree.get(i).obtenirNumComposant()+"#_,";
+		for (i=0;i<listeEntree.size();i++) 
+		{
+			if(listeEntree.get(i).obtenirNumComposant()==-1){s = s +"#"+listeEntree.get(i).getNumPort()+",";}
+			else{s = s + listeEntree.get(i).obtenirNumComposant()+"#"+listeEntree.get(i).getNumPort()+",";}
 		}
-		s = s + listeEntree.get(i).obtenirNumComposant()+"#_)";
-		return s;
+		s = s.substring(0,s.length()-1);
+		return s+")";
 	}
 }

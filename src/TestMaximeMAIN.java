@@ -79,6 +79,9 @@ public class TestMaximeMAIN {
 		compo6.ItrHaut();
 		System.out.println(cF2.evaluer());
 		System.out.println("La LED est : "+ ledR.etat);
+		
+		
+		Reader read = new Reader(stream);
 	}
 
 }

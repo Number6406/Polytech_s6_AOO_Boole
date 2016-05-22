@@ -261,7 +261,7 @@
                 {
                         for(Map.Entry<Integer,Integer> entry : connexionEntre.get(i).entrySet())
                         {
-                                (compo.getPortEntreInterne(i)).add(compo.getComposant(entry.getKey()).accederPortEntre(entry.getValue()));
+                                compo.connecterEntre(entry.getKey(),i,entry.getValue());
                         }
                 }
                 //Lier les coposant entre eux
@@ -279,7 +279,7 @@
                                 { //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
 
                                   if(entry2.getKey() == -1)//Connexion sortie
-                                  { (compo.getComposant(i).accederPortSortie(entry.getKey())).add(compo.getPortSortieInterne(entry2.getValue())); }
+                                  { compo.connecterSortie(i,entry2.getValue(),entry.getKey()); }
                                   //Connexion normale
                                   else { compo.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
                                 }
