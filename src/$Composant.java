@@ -36,5 +36,16 @@ public abstract class $Composant implements _Composant {
 		if(!(numPort >= 0 && numPort < listeEntrees.size())) throw new Require("PortExiste");
 		return listeEntrees.get(numPort);
 	}
+	
+	public String toString(){
+		String s = this.nomType+"("+this.nombreEntrees()+","+this.nombreSorties()+")->";
+		int j;
+		for (j = 0; j < listeSorties.size()-1; j++) {
+			s = s+"#"+j+listeSorties.get(j).toString()+",";
+		}
+		s = s+"#"+j+listeSorties.get(j).toString();
+		return s;
+	}
+	
 
 }

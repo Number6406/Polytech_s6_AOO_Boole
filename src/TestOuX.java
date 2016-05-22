@@ -2,6 +2,8 @@
 public class TestOuX {
 	
 	public static void tester(Circuit c){
+		String aff ;
+		
 		// Evaluations //
 		// Cas 1
 		((Itr)c.getComposant(1)).ItrBas();
@@ -11,12 +13,30 @@ public class TestOuX {
 		cF.evaluer();
 		System.out.println("Itr1 bas , Itr2 bas  : "+((Led)cF.getComposant(4)).etatRecepteur());
 		
+		// Affichage textuel //
+				aff = "CircuitTestOuX[\n";
+				for(int i = 1; i<5;i++){
+					aff = aff + "<"+i+"|"+c.getComposant(i).toString()+">\n";
+				}
+				aff = aff + "]";
+				
+				System.out.println("Affichage du circuit : \n"+aff);
+		
 		// Cas 2
 		((Itr)c.getComposant(1)).ItrHaut();
 		
 		cF = new CircuitFerme(c);
 		cF.evaluer();
 		System.out.println("Itr1 haut, Itr2 bas  : "+((Led)cF.getComposant(4)).etatRecepteur());
+		
+		// Affichage textuel //
+				aff = "CircuitTestOuX[\n";
+				for(int i = 1; i<5;i++){
+					aff = aff + "<"+i+"|"+c.getComposant(i).toString()+">\n";
+				}
+				aff = aff + "]";
+				
+				System.out.println("Affichage du circuit : \n"+aff);
 		
 		// Cas 3
 		((Itr)c.getComposant(1)).ItrBas();
@@ -25,6 +45,15 @@ public class TestOuX {
 		cF = new CircuitFerme(c);
 		cF.evaluer();
 		System.out.println("Itr1 bas , Itr2 haut : "+((Led)cF.getComposant(4)).etatRecepteur());
+		
+		// Affichage textuel //
+				aff = "CircuitTestOuX[\n";
+				for(int i = 1; i<5;i++){
+					aff = aff + "<"+i+"|"+c.getComposant(i).toString()+">\n";
+				}
+				aff = aff + "]";
+				
+				System.out.println("Affichage du circuit : \n"+aff);
 		
 
 		// Cas 4
@@ -35,6 +64,14 @@ public class TestOuX {
 		System.out.println("Itr1 haut, Itr2 haut : "+((Led)cF.getComposant(4)).etatRecepteur());
 		
 		// Affichage textuel //
+				aff = "CircuitTestOuX[\n";
+				for(int i = 1; i<5;i++){
+					aff = aff + "<"+i+"|"+c.getComposant(i).toString()+">\n";
+				}
+				aff = aff + "]";
+				
+				System.out.println("Affichage du circuit : \n"+aff);
+				
 	}
 
 	public static void main(String[] args) {
