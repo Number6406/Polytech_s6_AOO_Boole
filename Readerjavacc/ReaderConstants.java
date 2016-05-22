@@ -19,13 +19,17 @@ public interface ReaderConstants {
   /** RegularExpression Id. */
   int P_OUVERT = 9;
   /** RegularExpression Id. */
-  int P_FERME = 10;
+  int C_OUVERT = 10;
   /** RegularExpression Id. */
-  int FLECHE = 11;
+  int C_FERME = 11;
   /** RegularExpression Id. */
-  int SEPARATEUR = 12;
+  int P_FERME = 12;
   /** RegularExpression Id. */
-  int HASHTAG = 13;
+  int FLECHE = 13;
+  /** RegularExpression Id. */
+  int SEPARATEUR = 14;
+  /** RegularExpression Id. */
+  int HASHTAG = 15;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -42,6 +46,8 @@ public interface ReaderConstants {
     "<LETTER>",
     "<DIGIT>",
     "<P_OUVERT>",
+    "\"[\"",
+    "\"]\"",
     "<P_FERME>",
     "\"->\"",
     "<SEPARATEUR>",

@@ -1,8 +1,14 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class TestMaximeMAIN {
 
 	public static void main(String[] args) {
 		
+		String cheminFichier = (new File("")).getAbsolutePath()+"/File";
 		Circuit c = new Circuit();
 		Led l = new Led();
 		Non n = new Non();
@@ -80,8 +86,21 @@ public class TestMaximeMAIN {
 		System.out.println(cF2.evaluer());
 		System.out.println("La LED est : "+ ledR.etat);
 		
+		File fichierCircuit = new File(cheminFichier+"/circuit1.txt");
+		try 
+		{
+			//Reader2 read = new Reader2(new FileInputStream(fichierCircuit));
+			Reader read = new Reader(new FileInputStream(fichierCircuit));
+			Circuit c4 = (Circuit) read.read();
+			System.out.println(c4.toString());
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Ouuups");
+			e.printStackTrace();
+		}
 		
-		Reader read = new Reader(stream);
 	}
 
 }

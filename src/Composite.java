@@ -107,6 +107,9 @@ public class Composite extends $Composant implements _Composite{
 	public $Composant getComposant(int numComposant)
 	{return this.circuit_interne.getComposant(numComposant);}
 
+	/**Obtenir un composant selon son indice*/
+	public int nbComposant()
+	{return this.circuit_interne.nombreComposant();}
 	
 	//public boolean evaluable(){return true;}
 
