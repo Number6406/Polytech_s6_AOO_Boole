@@ -26,7 +26,7 @@ public class Composite extends $Composant implements _Composite{
 			this.listeEntrees.add(new PortEntree());
 			this.listeEntreInterne.add(new PortSortie());
 		}
-		for(j = 0; j < entre; j++)
+		for(j = 0; j < sortie; j++)
 		{	
 			this.listeSorties.add(new PortSortie());
 			this.listeSortieInterne.add(new PortEntree());}
