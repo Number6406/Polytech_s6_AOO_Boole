@@ -103,15 +103,16 @@
         int indice;
         String facultatif;
         String type;
-        TreeMap <Integer,Integer> liste;
+        $Composant c;
+
+        TreeMap <Integer,Integer> liste = new TreeMap<Integer,Integer>();
          System.out.println("Lire Composant");
     jj_consume_token(P_OUVERT);
     indice = Nombre();
          System.out.println("Indice : "+indice);
     jj_consume_token(SEPARATEUR);
     type = Nom();
-    compo = TYPE(type);
-         System.out.println("Composant : "  + compo);
+    c = TYPE(type);
     jj_consume_token(P_OUVERT);
     nb_entrees = Nombre();
     jj_consume_token(SEPARATEUR);
@@ -135,8 +136,6 @@
       jj_la1[3] = jj_gen;
       ;
     }
-         sortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();
-         liste = new TreeMap<Integer,Integer>();
     label_2:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -152,7 +151,9 @@
            sortie.put(port,liste);
     }
     jj_consume_token(P_FERME);
-         {if (true) return indice;}
+        compo =c;
+        System.out.println("compo : "+compo+"c : "+c);
+          {if (true) return indice;}
     throw new Error("Missing return statement in function");
   }
 
@@ -165,17 +166,14 @@
         int i;
         int indice;
         String facultatif;
-
+        Composite composite;
         $Composant c = null;
 
-        TreeMap <Integer,Integer> liste;
-        TreeMap <Integer,TreeMap<Integer,Integer>> connexionEntre;
-        TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> listeConnexion;
+        TreeMap <Integer,Integer> liste = new TreeMap <Integer,Integer>();
+        TreeMap <Integer,TreeMap<Integer,Integer>> connexionEntre = new TreeMap <Integer,TreeMap<Integer,Integer>>();
+        TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> listeConnexion = new TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>();
+        TreeMap <Integer,TreeMap<Integer,Integer>> s = new TreeMap <Integer,TreeMap<Integer,Integer>>();
          System.out.println("Lire Composite");
-         liste = new TreeMap <Integer,Integer>();
-        connexionEntre = new TreeMap <Integer,TreeMap<Integer,Integer>>();
-        connexionSortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();
-        listeConnexion = new TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>();
     jj_consume_token(P_OUVERT);
     indice = Nombre();
     jj_consume_token(SEPARATEUR);
@@ -185,7 +183,7 @@
     jj_consume_token(SEPARATEUR);
     nb_sorties = Nombre();
     jj_consume_token(P_FERME);
-         compo = new Composite(nb_entrees,nb_sorties,type);
+         composite = new Composite(nb_entrees,nb_sorties,type);
     jj_consume_token(C_OUVERT);
     label_3:
     while (true) {
@@ -219,11 +217,11 @@
         break label_4;
       }
       if (jj_2_2(10)) {
-        indiceCompo = COMPOSANT(c, connexionSortie);
+        indiceCompo = COMPOSANT(c, s);
       } else {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case P_OUVERT:
-          indiceCompo = COMPOSITE(c ,type,connexionSortie);
+          indiceCompo = COMPOSITE(c ,type,s);
           break;
         default:
           jj_la1[8] = jj_gen;
@@ -231,7 +229,7 @@
           throw new ParseException();
         }
       }
-          System.out.println("Ajouter Composant : "+ indiceCompo);listeConnexion.put(indiceCompo,connexionSortie);((Composite) compo).ajouter(c,indiceCompo);
+          System.out.println("Ajouter Composant : "+ indiceCompo);listeConnexion.put(indiceCompo,s);composite.ajouter(c,indiceCompo);
     }
     jj_consume_token(C_FERME);
     label_5:
@@ -260,7 +258,7 @@
       }
       jj_consume_token(FLECHE);
     }
-         connexionSortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();
+         s = new TreeMap <Integer,TreeMap<Integer,Integer>>();
     label_7:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -280,16 +278,16 @@
         jj_la1[12] = jj_gen;
         ;
       }
-         connexionSortie.put(numPort,liste);
+         s.put(numPort,liste);
     }
     jj_consume_token(P_FERME);
                 //Connecter les port d'entrées
-                System.out.println("Nombre de composant"+((Composite)compo).nbComposant());
+                System.out.println("Nombre de composant"+composite.nbComposant());
                 for(i = 0; i <nb_entrees; i++)
                 {
                         for(Map.Entry<Integer,Integer> entry : connexionEntre.get(i).entrySet())
                         {
-                                ((Composite)compo).connecterEntre(entry.getKey(),i,entry.getValue());
+                                composite.connecterEntre(entry.getKey(),i,entry.getValue());
                         }
                 }
                 //Lier les coposant entre eux
@@ -307,22 +305,21 @@
                                 { //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
 
                                   if(entry2.getKey() == -1)//Connexion sortie
-                                  { ((Composite)compo).connecterSortie(i,entry2.getValue(),entry.getKey()); }
+                                  { composite.connecterSortie(i,entry2.getValue(),entry.getKey()); }
                                   //Connexion normale
-                                  else { ((Composite)compo).connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
+                                  else { composite.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
                                 }
                         }
                 }
+                compo = composite;
                 {if (true) return indice;}
     throw new Error("Missing return statement in function");
   }
 
   final public int ENTRE_SORTIE(TreeMap<Integer,Integer> liste) throws ParseException, Exception {
-  TreeMap<Integer, Integer> listeCo = new TreeMap<Integer, Integer>();
   int numCompo2;
   int port2;
   int port;
-     liste = new TreeMap<Integer,Integer>();
     jj_consume_token(HASHTAG);
     port = Nombre();
     jj_consume_token(P_OUVERT);
@@ -340,7 +337,7 @@
           jj_la1[13] = jj_gen;
           ;
         }
-                 listeCo.put(-1,port2);
+                 liste.put(-1,port2);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case HASHTAG:
           ;
@@ -365,7 +362,7 @@
           jj_la1[15] = jj_gen;
           ;
         }
-                 listeCo.put(numCompo2,port2);
+                 liste.put(numCompo2,port2);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case NUM:
           ;
@@ -400,11 +397,6 @@
     finally { jj_save(1, xla); }
   }
 
-  private boolean jj_3R_16() {
-    if (jj_scan_token(HASHTAG)) return true;
-    return false;
-  }
-
   private boolean jj_3R_12() {
     if (jj_scan_token(ID)) return true;
     return false;
@@ -412,11 +404,6 @@
 
   private boolean jj_3R_15() {
     if (jj_3R_16()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_11() {
-    if (jj_scan_token(NUM)) return true;
     return false;
   }
 
@@ -444,6 +431,11 @@
     return false;
   }
 
+  private boolean jj_3R_11() {
+    if (jj_scan_token(NUM)) return true;
+    return false;
+  }
+
   private boolean jj_3_2() {
     if (jj_3R_10()) return true;
     return false;
@@ -460,6 +452,11 @@
   }
 
   private boolean jj_3R_13() {
+    return false;
+  }
+
+  private boolean jj_3R_16() {
+    if (jj_scan_token(HASHTAG)) return true;
     return false;
   }
 

@@ -7,6 +7,7 @@ public abstract class $Composant implements _Composant {
 	protected List<PortSortie> listeSorties;
 	protected List<PortEntree> listeEntrees;
 	protected String nomType;
+	protected int numero;
 	
 	public int nombreSorties(){
 		return listeSorties.size();
@@ -18,6 +19,14 @@ public abstract class $Composant implements _Composant {
 	
 	public String obtenirType(){
 		return this.nomType;
+	}
+	
+	public void ajouterNum(int i){
+		this.numero = i;
+	}
+	
+	public int getNum(){
+		return this.numero;
 	}
 	
 	/**
