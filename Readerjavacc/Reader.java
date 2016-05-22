@@ -56,13 +56,12 @@
         jj_la1[0] = jj_gen;
         break label_1;
       }
-                          sortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();
       if (jj_2_1(10)) {
-        compo = COMPOSANT(sortie);
+        compo = COMPOSANT(listeConnexion);
       } else {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case P_OUVERT:
-          compo = COMPOSITE(type, sortie);
+          compo = COMPOSITE(type, listeConnexion);
           break;
         default:
           jj_la1[1] = jj_gen;
@@ -70,13 +69,12 @@
           throw new ParseException();
         }
       }
-                          listeConnexion.put(compo.getNum(), sortie);
-                        circuit.ajouter(compo,compo.getNum());
+                          circuit.ajouter(compo,compo.getNum());
     }
     jj_consume_token(C_FERME);
                         //Lier les coposant entre eux
                         //Pour chaque composant
-                        for(i = 0; i <listeConnexion.size(); i++)
+                        for(i = 1; i <listeConnexion.size(); i++)
                         {
                                 //Obtenir liste des connexion sortie
                                 sortie = listeConnexion.get(i);
@@ -86,7 +84,7 @@
                                         //entry.getKey() = numPort de sortie
                                         for(Map.Entry<Integer,Integer> entry2 : entry.getValue().entrySet())
                                         { //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
-                                          circuit.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue());
+                                          circuit.connecter(i-1,entry.getKey()-1,entry2.getKey()-1,entry2.getValue()-1);
                                         }
                                 }
                         }
@@ -94,19 +92,20 @@
     throw new Error("Missing return statement in function");
   }
 
-  final public $Composant COMPOSANT(TreeMap <Integer,TreeMap<Integer,Integer>> sortie) throws ParseException, Exception {
+  final public $Composant COMPOSANT(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co) throws ParseException, Exception {
         int nb_sorties;
         int nb_entrees;
         int port;
         int indice;
         String facultatif;
         String type;
-        TreeMap <Integer,Integer> liste = new TreeMap<Integer,Integer>();
+        TreeMap <Integer,TreeMap<Integer,Integer>> sortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();
+
         $Composant compo;
          System.out.println("Lire Composant");
     jj_consume_token(P_OUVERT);
     indice = Nombre();
-         System.out.println("Indice : "+indice);
+         System.out.println("Indice compo : "+indice);
     jj_consume_token(SEPARATEUR);
     type = Nom();
     compo = TYPE(type);
@@ -144,18 +143,15 @@
         jj_la1[4] = jj_gen;
         break label_2;
       }
-           port = -1;
-          liste = new TreeMap<Integer,Integer>();
-      port = ENTRE_SORTIE(liste);
-           sortie.put(port,liste);
+      ENTRE_SORTIE(sortie);
     }
     jj_consume_token(P_FERME);
-         {if (true) return compo;}
+          co.put(indice,sortie);{if (true) return compo;}
     throw new Error("Missing return statement in function");
   }
 
 /**"<".NUM."|".TYPE."(".NUM.",".NUM.")"."[".SORTIE_ENTRE.COMPOSANT."]".[ID]."->".SORTIE_ENTRE.">"*/
-  final public $Composant COMPOSITE(String type,TreeMap <Integer,TreeMap<Integer,Integer>> connexionSortie) throws ParseException, Exception {
+  final public $Composant COMPOSITE(String type,TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co) throws ParseException, Exception {
         int nb_sorties;
         int nb_entrees;
         int indiceCompo = 0;
@@ -167,8 +163,8 @@
         Composite compo;
         $Composant c;
 
-        TreeMap <Integer,Integer> liste = new TreeMap <Integer,Integer>();
         TreeMap <Integer,TreeMap<Integer,Integer>> s = new TreeMap <Integer,TreeMap<Integer,Integer>>();
+        TreeMap <Integer,TreeMap<Integer,Integer>> connexionSortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();
         TreeMap <Integer,TreeMap<Integer,Integer>> connexionEntre = new TreeMap <Integer,TreeMap<Integer,Integer>>();
         TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> listeConnexion = new TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>();
     jj_consume_token(P_OUVERT);
@@ -193,9 +189,7 @@
         jj_la1[5] = jj_gen;
         break label_3;
       }
-      numPort = ENTRE_SORTIE(liste);
-         connexionEntre.put(numPort,liste);
-        liste = new TreeMap<Integer,Integer>();
+      ENTRE_SORTIE(connexionEntre);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case SEPARATEUR:
         jj_consume_token(SEPARATEUR);
@@ -216,11 +210,11 @@
         break label_4;
       }
       if (jj_2_2(10)) {
-        c = COMPOSANT(s);
+        c = COMPOSANT(listeConnexion);
       } else {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case P_OUVERT:
-          c = COMPOSITE(type,s);
+          c = COMPOSITE(type,listeConnexion);
           break;
         default:
           jj_la1[8] = jj_gen;
@@ -228,7 +222,7 @@
           throw new ParseException();
         }
       }
-          System.out.println("Taille : "+ s.size());listeConnexion.put(c.getNum(),s);compo.ajouter(c,indiceCompo);s = new TreeMap <Integer,TreeMap<Integer,Integer>>();
+         compo.ajouter(c,c.getNum());
     }
     jj_consume_token(C_FERME);
     label_5:
@@ -267,7 +261,7 @@
         jj_la1[11] = jj_gen;
         break label_7;
       }
-      numPort = ENTRE_SORTIE(liste);
+      ENTRE_SORTIE(connexionSortie);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case SEPARATEUR:
         jj_consume_token(SEPARATEUR);
@@ -276,22 +270,24 @@
         jj_la1[12] = jj_gen;
         ;
       }
-         connexionSortie.put(numPort,liste);
-        liste = new TreeMap<Integer,Integer>();
     }
     jj_consume_token(P_FERME);
                 //Connecter les port d'entrées
-                System.out.println("Nombre de composant"+compo.nbComposant());
-                for(i = 0; i <nb_entrees; i++)
+                System.out.println("Nombre de composant : "+compo.nbComposant());
+                for(i = 1; i <nb_entrees; i++)
                 {
+                        System.out.println("Indice : "+i);
                         for(Map.Entry<Integer,Integer> entry : connexionEntre.get(i).entrySet())
                         {
-                                compo.connecterEntre(entry.getKey(),i,entry.getValue());
+                                System.out.println("Nb portComposant : "+compo.getComposant(entry.getKey()).nombreEntrees());
+
+                                compo.connecterEntre(entry.getKey(),i,entry.getValue()-1);
+
                         }
                 }
                 //Lier les coposant entre eux
                 //Pour chaque composant
-                for(i = 0; i <listeConnexion.size(); i++)
+                for(i = 1; i <listeConnexion.size(); i++)
                 {
                         //Obtenir liste des connexion sortie
                         s = listeConnexion.get(i);
@@ -304,20 +300,22 @@
                                 { //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
 
                                   if(entry2.getKey() == -1)//Connexion sortie
-                                  { compo.connecterSortie(i,entry2.getValue(),entry.getKey()); }
+                                  { compo.connecterSortie(i,entry2.getValue()-1,entry.getKey()); }
                                   //Connexion normale
-                                  else { compo.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
+                                  else { compo.connecter(i,entry.getKey()-1,entry2.getKey(),entry2.getValue()-1); }
                                 }
                         }
                 }
+                co.put(compo.getNum(),connexionSortie);
                 {if (true) return compo;}
     throw new Error("Missing return statement in function");
   }
 
-  final public int ENTRE_SORTIE(TreeMap<Integer,Integer> liste) throws ParseException, Exception {
+  final public void ENTRE_SORTIE(TreeMap <Integer,TreeMap<Integer,Integer>> listeCo) throws ParseException, Exception {
   int numCompo2;
   int port2;
   int port;
+  TreeMap <Integer,Integer> liste = new TreeMap <Integer,Integer>();
     jj_consume_token(HASHTAG);
     port = Nombre();
     jj_consume_token(P_OUVERT);
@@ -377,8 +375,7 @@
       throw new ParseException();
     }
     jj_consume_token(P_FERME);
-         {if (true) return port;}
-    throw new Error("Missing return statement in function");
+         listeCo.put(port,liste);
   }
 
   private boolean jj_2_1(int xla) {
@@ -439,11 +436,6 @@
     return false;
   }
 
-  private boolean jj_3_2() {
-    if (jj_3R_10()) return true;
-    return false;
-  }
-
   private boolean jj_3_1() {
     if (jj_3R_10()) return true;
     return false;
@@ -455,6 +447,11 @@
   }
 
   private boolean jj_3R_13() {
+    return false;
+  }
+
+  private boolean jj_3_2() {
+    if (jj_3R_10()) return true;
     return false;
   }
 
