@@ -26,7 +26,7 @@ public class PortSortie extends $Port
 	public void add(PortEntree e)
 	{this.listeEntree.add(e);}
 	
-	//#TODO v�rifier que le port est dans la liste (si i==taille retrouner une erreur)
+	//#TODO v�rifier que le port est dans la liste (si i==taille retrouner une erreur)
 	public PortEntree enleverUneSortie(PortEntree e)
 	{
 		PortEntree p;
@@ -59,5 +59,17 @@ public class PortSortie extends $Port
 	public ArrayList<PortEntree> getEntrees()
 	{
 		return this.listeEntree;
+	}
+	
+	// Affiche la liste des composants auxquels le port de sortie est connecté
+	//TODO ajouter le numéro de port d'entrée à un port pour la représentation textuelle
+	public String toString(){
+		String s = "(";
+		int i;
+		for (i=0;i<listeEntree.size()-1;i++) {
+			s = s + listeEntree.get(i).obtenirNumComposant()+"#_,";
+		}
+		s = s + listeEntree.get(i).obtenirNumComposant()+"#_)";
+		return s;
 	}
 }

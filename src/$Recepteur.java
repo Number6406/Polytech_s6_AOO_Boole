@@ -6,5 +6,8 @@ public abstract class $Recepteur extends $Composant {
 	public boolean etatRecepteur() {
 		return this.etat;
 	}
-	
+
+	public String toString(){
+		return(this.nomType+"("+this.nombreEntrees()+","+this.nombreSorties()+"){"+etat+"}");
+	}
 }

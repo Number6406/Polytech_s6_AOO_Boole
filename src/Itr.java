@@ -52,4 +52,15 @@ public class Itr extends $Generateur{
 			throw new Invariant("BienConstruit");
 		}
 	}
+	
+	public String toString(){
+		String s = this.nomType+"("+this.nombreEntrees()+","+this.nombreSorties()+"){"+this.etat+"}->";
+		int j;
+		for (j = 0; j < listeSorties.size()-1; j++) {
+			s = s+"#"+j+listeSorties.get(j).toString()+",";
+		}
+		s = s+"#"+j+listeSorties.get(j).toString();
+		return s;
+	}
+	
 }
