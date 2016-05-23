@@ -18,6 +18,7 @@ public class MainAlicia {
 				Et compo7 = new Et();
 				Led compo8 = new Led();
 				
+				compo4.ItrHaut();
 				Circuit c3 = new Circuit();
 				c3.ajouter(compo1, 1);
 				c3.ajouter(compo2, 2);
