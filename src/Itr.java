@@ -68,8 +68,6 @@ public class Itr extends $Generateur{
 	public Iterator<Void> iterator() {
 		Iterator<Void> I = new Iterator<Void>() {
 			
-			int i = 0;
-			
 			@Override
 			public Void next() {
 				if(etatGenerateur()){
@@ -77,16 +75,12 @@ public class Itr extends $Generateur{
 				}else{
 					ItrHaut();
 				}
-				i++;
 				return null;
 			}
 			
 			@Override
 			public boolean hasNext() {
-				if(i==0){
 				return true;
-				}
-				return false;
 			}
 		};
 		return I;

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import jus.util.assertion.Require;
 
@@ -37,6 +38,37 @@ public class CircuitTestUnitaire {
 		return c;
 	}
 	
+	private static void remplirTab(int n,CircuitFerme cf,Extension Tab,List<$Generateur> G, List<$Recepteur> R, int nbG, int nbR){
+		if(n == 0){
+			cf.evaluer();
+			Tab.ajouterLigne(creerCouple(G,R,nbG,nbR));
+		}
+		int i;
+		for( i = n ; i < nbG && i < n+1; i++){
+			remplirTab(n+1,cf,Tab, G,R,nbG,nbR);
+			$Generateur gen = G.get(i);
+			Iterator<Void> iter = gen.iterator();
+			if(iter.hasNext()){
+				iter.next();
+				cf.evaluer();
+				Tab.ajouterLigne(creerCouple(G,R,nbG,nbR));
+				remplirTab(n+1,cf,Tab, G,R,nbG,nbR);
+				iter.next();
+			}
+		}
+		/*
+		for($Generateur gen : G){
+			Iterator<Void> iter = gen.iterator();
+			if(iter.hasNext()){
+				iter.next();
+				cf.evaluer();
+				Tab.ajouterLigne(creerCouple(G,R,nbG,nbR));
+				if(iter.hasNext()){iter.next();}
+			}
+		}
+		*/
+	}
+	
 	/**
 	 * Affiche la totalité des combinaisons (entrées, sorties) possibles
 	 * @param c un circuit à tester
@@ -68,18 +100,12 @@ public class CircuitTestUnitaire {
 		}
 		
 		// Tableau pour entrer toutes les entrées possibles avec leur sorties correspondantes.
-		Extension Tab = new Extension(nbGenerateurs, nbRecepteurs);
+		Extension Tab = new Extension(nbGenerateurs, nbRecepteurs);		
 		
-		cf.evaluer();
-		Tab.ajouterLigne(creerCouple(listeGenerateur,listeRecepteur,nbGenerateurs, nbRecepteurs));
-		
-		for($Generateur G : listeGenerateur){
-				cf.evaluer();
-				Tab.ajouterLigne(creerCouple(listeGenerateur,listeRecepteur,nbGenerateurs, nbRecepteurs));
-		}
+		remplirTab(0,cf,Tab,listeGenerateur,listeRecepteur,nbGenerateurs, nbRecepteurs);
 		
 		System.out.println(Tab.toString());
-		
+		System.out.println(cf.toString());
 	}
 	
 
