@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Test ((Composite | Modele)*, Circuit)>
+<!ELEMENT Circuit (Composant+)>
+<!ATTLIST Circuit name NMTOKEN #REQUIRED>
+<!ELEMENT Composant (Connexion*)>
+<!ATTLIST Composant
+idf NMTOKEN #REQUIRED
+type NMTOKEN #REQUIRED
+>
+<!ELEMENT Connexion (Destination+)>
+<!ATTLIST Connexion sortie CDATA #REQUIRED>
+<!ELEMENT Destination EMPTY>
+<!ATTLIST Destination
+composant NMTOKEN #REQUIRED
+entree CDATA #REQUIRED
+>
+<!ELEMENT Composite (Composant+,Interface)>
+<!ATTLIST Composite
+name NMTOKEN #REQUIRED
+entrees CDATA #REQUIRED
+sorties CDATA #REQUIRED
+>
+<!ELEMENT Modele (Composant+,Interface)>
+<!ATTLIST Modele
+name NMTOKEN #REQUIRED
+entrees CDATA #REQUIRED
+sorties CDATA #REQUIRED
+>
+<!ELEMENT Interface (Entree*,Sortie*)>
+<!ELEMENT Entree (Destination+)>
+<!ATTLIST Entree
+port CDATA #REQUIRED
+>
+<!ELEMENT Sortie EMPTY>
+<!ATTLIST Sortie
+interface CDATA #REQUIRED
+composant CDATA #REQUIRED
+port CDATA #REQUIRED
+>

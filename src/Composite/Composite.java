@@ -60,7 +60,7 @@ public class Composite extends $Composant implements _Composite, Cloneable{
 	/**Obtenir un composant selon son indice*/
 	/**@Require : Composant-1<NbComposant*/
 	public $Composant getComposant(int numComposant)throws Require
-	{	if(this.circuit_interne.nombreComposant()<=numComposant){throw new Require("Existe");}
+	{	if(this.circuit_interne.nombreComposant()<=numComposant-1){throw new Require("Existe");}
 		return this.circuit_interne.getComposant(numComposant);}
 
 	/**Obtenir un composant selon son indice*/

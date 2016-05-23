@@ -90,8 +90,8 @@ public class PortSortie extends $Port implements Cloneable
 	public PortEntree chercherIndice(int indice) throws Require
 	{
 		int taille = this.listeEntree.size();
-		if(indice>=taille){ throw new Require("Indice");}
-		return this.listeEntree.get(indice);
+		if(indice-1>=taille){ throw new Require("Indice");}
+		return this.listeEntree.get(indice-1);
 	}
 	
 	/**

@@ -10,6 +10,7 @@ import java.util.TreeMap;
 import BaseComposite.Base;
 import BaseComposite.Lecture;
 import Reader.Reader;
+import xml.CircuitXML;
 import Circuit.Circuit;
 import Circuit.CircuitFerme;
 import Composant.Et;
@@ -194,8 +195,14 @@ public class TestMaximeMAIN {
 		c5.connecter(3, 1, 6, 1);
 		c5.connecter(4, 1, 6, 2);
 		c5.connecter(6, 1, 7, 1);
-		System.out.println(c5);
-		System.out.println(c4);
+		//System.out.println(c5);
+		//System.out.println(c4);
+		
+		CircuitXML xml = new CircuitXML();
+		System.out.println(xml.toSTringXMLCircuit(c5, "blop"));
+		//System.out.println(xml.toSTringXMLComposant(cpo1));
+		//System.out.println(xml.toSTringXMLComposant(cpo2));
+		//System.out.println(xml.toSTringXMLComposite(cpo6));
 		
 	}
 
