@@ -34,17 +34,17 @@ public class Composite extends $Composant implements _Composite{
 	}
 	
 	//ACCEDER AU PORTS ENTRE ET SORTIE INTERNE
-	/**@Require : i < nombre sortie*/
+	/**@Require : i <= nombreSorties()*/
 	public PortEntree getPortSortieInterne(int i) throws Require
 	{
-		if(i>=this.nombreSorties()){throw new Require("Taille");}
+		if(i>this.nombreSorties()){throw new Require("Taille");}
 		return this.listeSortieInterne.get(i-1);
 	}
 
-	/**@Require : i < nombre entre*/
+	/**@Require : i <= nombreEntrees()*/
 	public PortSortie getPortEntreInterne(int i) throws Require
 	{
-		if(i>=this.nombreEntrees()){throw new Require("Taille");}
+		if(i>this.nombreEntrees()){throw new Require("Taille");}
 		return this.listeEntreInterne.get(i-1);
 	}
 
