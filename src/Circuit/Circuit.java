@@ -22,14 +22,13 @@ public class Circuit implements _Circuit {
 	}
 
 	
-	/**
-	 * #TODO Javadoc + test si numero composant deja pris
+	/** Fonction permettant d'ajouter un composant dans un circuit.
 	 * @param nouveauComposant Composant à ajouter au circuit
 	 * @param numeroComposant Numeros du composant à ajouter dans le circuit.
-	 * @require getComposant(numeroComposant)!=null && nouveauComposant!=null && numeroComposant>=1
+	 * @require getComposant(numeroComposant)==null && nouveauComposant!=null && numeroComposant>=1
 	 */
 	public void ajouter($Composant nouveauComposant, int numeroComposant) {
-		if(getComposant(numeroComposant)==null) throw new Require("Circuit : Numero composant deja pris");
+		if(getComposant(numeroComposant)!=null) throw new Require("Circuit : Numero composant deja pris");
 		if(nouveauComposant==null) throw new Require("Circuit : Composant null");
 		if(numeroComposant<1) throw new Require("Circuit : numero composant invalide");
 		
