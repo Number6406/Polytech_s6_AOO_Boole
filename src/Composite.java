@@ -38,14 +38,14 @@ public class Composite extends $Composant implements _Composite{
 	public PortEntree getPortSortieInterne(int i) throws Require
 	{
 		if(i>=this.nombreSorties()){throw new Require("Taille");}
-		return this.listeSortieInterne.get(i);
+		return this.listeSortieInterne.get(i-1);
 	}
 
 	/**@Require : i < nombre entre*/
 	public PortSortie getPortEntreInterne(int i) throws Require
 	{
 		if(i>=this.nombreEntrees()){throw new Require("Taille");}
-		return this.listeEntreInterne.get(i);
+		return this.listeEntreInterne.get(i-1);
 	}
 
 	//METTRE A JOUR LES VALEURS DES PORTS PAS SURE QUE SE SOIT UTILE
@@ -163,7 +163,6 @@ public class Composite extends $Composant implements _Composite{
 		}
 		
 		this.transmettreValeurSortie();
-		this.valeur = true;
 	}
 	
 	/**Utilisé pour a fonction calculer*/
@@ -183,22 +182,22 @@ public class Composite extends $Composant implements _Composite{
 		listeCompo = "";
 		listeEntre = "";
 		listeSortie = "";
-		for (i = 0; i < this.nombreEntrees(); i++) 
+		for (i = 1; i < this.nombreEntrees(); i++) 
 		{
 			listeEntre = listeEntre+"#"+i+this.listeEntreInterne.get(i).toString()+",";
 		}
 		listeEntre = listeEntre.substring(0,listeEntre.length()-1);
-		for(i = 0; i < this.circuit_interne.nombreComposant(); i++)
+		for(i = 1; i < this.circuit_interne.nombreComposant(); i++)
 		{
 			listeCompo = listeCompo + "<"+i+"|"+this.circuit_interne.getComposant(i).toString()+">\n";
 		}
 		composite = composite + listeEntre + listeCompo + "]"+/**@TODO : ajouter le facultatif*/"->";
 		
-		for (i = 0; i < this.nombreSorties(); i++) 
+		for (i = 1; i < this.nombreSorties(); i++) 
 		{
 			listeSortie = listeSortie+"#"+i+this.listeSorties.get(i).toString()+",";
 		}
-		listeSortie = listeSortie.substring(0,listeSortie.length()-1);
+		if(listeSortie.length()>0){listeSortie = listeSortie.substring(0,listeSortie.length()-1);}
 		composite = composite+listeSortie+">";
 		return composite;
 	}
