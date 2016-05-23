@@ -28,8 +28,8 @@ public class Composite extends $Composant implements _Composite{
 		}
 		for(j = 0; j < sortie; j++)
 		{	
-			this.listeSorties.add(new PortSortie(i+1));
-			this.listeSortieInterne.add(new PortEntree(i+1));}
+			this.listeSorties.add(new PortSortie(j+1));
+			this.listeSortieInterne.add(new PortEntree(j+1));}
 		this.circuit_interne = new Circuit();
 	}
 	
@@ -199,7 +199,7 @@ public class Composite extends $Composant implements _Composite{
 			listeSortie = listeSortie+"#"+i+this.accederPortSortie(i).toString()+",";
 		}
 		if(listeSortie.length()>0){listeSortie = listeSortie.substring(0,listeSortie.length()-1);}
-		composite = composite+listeSortie+">";
+		composite = composite+listeSortie;
 		return composite;
 	}
 

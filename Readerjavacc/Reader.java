@@ -69,8 +69,7 @@
           throw new ParseException();
         }
       }
-                          System.out.println("Numero composant"+compo.getNum()+" composant : "+compo);
-                          circuit.ajouter(compo,compo.getNum());
+                         circuit.ajouter(compo,compo.getNum());
     }
     jj_consume_token(C_FERME);
                         //Lier les coposant entre eux
@@ -103,7 +102,6 @@
         TreeMap <Integer,TreeMap<Integer,Integer>> sortie = new TreeMap <Integer,TreeMap<Integer,Integer>>();
 
         $Composant compo;
-         System.out.println("Lire Composant");
     jj_consume_token(P_OUVERT);
     indice = Nombre();
     jj_consume_token(SEPARATEUR);
@@ -146,7 +144,7 @@
       ENTRE_SORTIE(sortie);
     }
     jj_consume_token(P_FERME);
-          co.put(indice,sortie);{if (true) return compo;}
+         co.put(indice,sortie);{if (true) return compo;}
     throw new Error("Missing return statement in function");
   }
 
@@ -273,22 +271,17 @@
     }
     jj_consume_token(P_FERME);
                 //Connecter les port d'entrées
-                System.out.println("Nombre de composant : "+compo.nbComposant());
                 for(i = 1; i < nb_entrees+1; i++)
                 {
-                        System.out.println("Nombre Entre : "+i);
                         for(Map.Entry<Integer,Integer> entry : connexionEntre.get(i).entrySet())
                         {
-                                System.out.println("compo entre : "+entry.getKey()+" Compo sortie : "+entry.getValue());
-                                compo.connecterEntre(entry.getKey(),i,entry.getValue());
-
+                                compo.connecterEntre(i,entry.getKey(),entry.getValue());
                         }
                 }
                 //Lier les coposant entre eux
                 //Pour chaque composant
                 for(i = 1; i <listeConnexion.size()+1; i++)
                 {
-                        System.out.println("Num\u00e9ro Composant : "+i);
                         //Obtenir liste des connexion sortie
                         s = listeConnexion.get(i);
 
@@ -300,14 +293,13 @@
                                 { //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
 
                                   if(entry2.getKey() == -1)//Connexion sortie
-                                  { compo.connecterSortie(i,entry2.getValue(),entry.getKey()); }
+                                  { compo.connecterSortie(i,entry.getKey(),entry2.getValue()); }
                                   //Connexion normale
-                                  else { compo.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
+                                  else {compo.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
                                 }
                         }
                 }
                 co.put(compo.getNum(),connexionSortie);
-                System.out.println("=====================================");
                 {if (true) return compo;}
     throw new Error("Missing return statement in function");
   }
@@ -393,8 +385,8 @@
     finally { jj_save(1, xla); }
   }
 
-  private boolean jj_3R_16() {
-    if (jj_scan_token(HASHTAG)) return true;
+  private boolean jj_3_2() {
+    if (jj_3R_10()) return true;
     return false;
   }
 
@@ -405,6 +397,11 @@
 
   private boolean jj_3R_15() {
     if (jj_3R_16()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_16() {
+    if (jj_scan_token(HASHTAG)) return true;
     return false;
   }
 
@@ -442,17 +439,12 @@
     return false;
   }
 
-  private boolean jj_3R_14() {
-    if (jj_scan_token(P_OUVERT)) return true;
-    return false;
-  }
-
   private boolean jj_3R_13() {
     return false;
   }
 
-  private boolean jj_3_2() {
-    if (jj_3R_10()) return true;
+  private boolean jj_3R_14() {
+    if (jj_scan_token(P_OUVERT)) return true;
     return false;
   }
 
