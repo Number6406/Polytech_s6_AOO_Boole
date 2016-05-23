@@ -20,7 +20,7 @@ public class Non extends $Transformateur {
 		this.listeSorties = new ArrayList<PortSortie>();
 		
 		this.listeEntrees.add(0, new PortEntree(1));
-		this.listeSorties.add(0, new PortSortie(2));
+		this.listeSorties.add(0, new PortSortie(1));
 		_invariant();
 	}
 	

@@ -36,12 +36,14 @@ public abstract class $Composant implements _Composant {
 	 */
 	public PortSortie accederPortSortie(int numPort) {
 		//Require
+		numPort-=1;
 		if(!(numPort >= 0 && numPort < listeSorties.size())) throw new Require("PortExiste");
 		return listeSorties.get(numPort);
 	}
 	
 	public PortEntree accederPortEntre(int numPort) {
 		//Require
+		numPort-=1;
 		if(!(numPort >= 0 && numPort < listeEntrees.size())) throw new Require("PortExiste");
 		return listeEntrees.get(numPort);
 	}
