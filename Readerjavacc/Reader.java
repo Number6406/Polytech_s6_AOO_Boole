@@ -274,18 +274,21 @@
     jj_consume_token(P_FERME);
                 //Connecter les port d'entrées
                 System.out.println("Nombre de composant : "+compo.nbComposant());
-                for(i = 1; i <nb_entrees; i++)
+                for(i = 1; i < nb_entrees+1; i++)
                 {
+                        System.out.println("Nombre Entre : "+i);
                         for(Map.Entry<Integer,Integer> entry : connexionEntre.get(i).entrySet())
                         {
+                                System.out.println("compo entre : "+entry.getKey()+" Compo sortie : "+entry.getValue());
                                 compo.connecterEntre(entry.getKey(),i,entry.getValue());
 
                         }
                 }
                 //Lier les coposant entre eux
                 //Pour chaque composant
-                for(i = 1; i <listeConnexion.size(); i++)
+                for(i = 1; i <listeConnexion.size()+1; i++)
                 {
+                        System.out.println("Num\u00e9ro Composant : "+i);
                         //Obtenir liste des connexion sortie
                         s = listeConnexion.get(i);
 
@@ -304,6 +307,7 @@
                         }
                 }
                 co.put(compo.getNum(),connexionSortie);
+                System.out.println("=====================================");
                 {if (true) return compo;}
     throw new Error("Missing return statement in function");
   }
