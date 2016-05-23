@@ -1,7 +1,11 @@
 
 public class TestOuX {
 	
-	public static void tester(Circuit c){
+	/**
+	 * Fonction de test du circuit avec un oux, version itérative
+	 * @param c, le circuit OuX Uniquement !
+	 */
+	private static void tester(Circuit c){		
 		String aff ;
 		
 		// Evaluations //
@@ -14,12 +18,7 @@ public class TestOuX {
 		System.out.println("Itr1 bas , Itr2 bas  : "+((Led)cF.getComposant(4)).etatRecepteur());
 		
 		// Affichage textuel //
-				aff = "CircuitTestOuX[\n";
-				for(int i = 1; i<5;i++){
-					aff = aff + "<"+i+"|"+c.getComposant(i).toString()+">\n";
-				}
-				aff = aff + "]";
-				
+				aff = c.toString("Test1");				
 				System.out.println("Affichage du circuit : \n"+aff);
 		
 		// Cas 2
@@ -30,12 +29,7 @@ public class TestOuX {
 		System.out.println("Itr1 haut, Itr2 bas  : "+((Led)cF.getComposant(4)).etatRecepteur());
 		
 		// Affichage textuel //
-				aff = "CircuitTestOuX[\n";
-				for(int i = 1; i<5;i++){
-					aff = aff + "<"+i+"|"+c.getComposant(i).toString()+">\n";
-				}
-				aff = aff + "]";
-				
+				aff = c.toString("Test2");		
 				System.out.println("Affichage du circuit : \n"+aff);
 		
 		// Cas 3
@@ -47,12 +41,7 @@ public class TestOuX {
 		System.out.println("Itr1 bas , Itr2 haut : "+((Led)cF.getComposant(4)).etatRecepteur());
 		
 		// Affichage textuel //
-				aff = "CircuitTestOuX[\n";
-				for(int i = 1; i<5;i++){
-					aff = aff + "<"+i+"|"+c.getComposant(i).toString()+">\n";
-				}
-				aff = aff + "]";
-				
+				aff = c.toString("Test3");		
 				System.out.println("Affichage du circuit : \n"+aff);
 		
 
@@ -64,12 +53,7 @@ public class TestOuX {
 		System.out.println("Itr1 haut, Itr2 haut : "+((Led)cF.getComposant(4)).etatRecepteur());
 		
 		// Affichage textuel //
-				aff = "CircuitTestOuX[\n";
-				for(int i = 1; i<5;i++){
-					aff = aff + "<"+i+"|"+c.getComposant(i).toString()+">\n";
-				}
-				aff = aff + "]";
-				
+				aff = c.toString("Test4");		
 				System.out.println("Affichage du circuit : \n"+aff);
 				
 	}
