@@ -1,20 +1,40 @@
+import java.util.ArrayList;
+import java.util.List;
+
+import jus.util.assertion.Invariant;
+import jus.util.assertion.Require;
+
 /**
  * Permet de tester un composant en créeant un circuit de test.
  * @author alicia
- *
+ * @invariant Bonne Taille : (nbE==Entrees.size()&&nbS==Sorties.size())
  */
 public class CircuitTestUnitaire {
 
+	
 	public static void main(String[] args) {
 		
 		$Composant compo = new Non();
 		Circuit c1 = creerCircuit(compo);
 		
 		System.out.println(c1.toString());
+		
+		TableauTest T = new TableauTest(2, 1);
+		
 
 	}
 	
-	public static void tester(Circuit c){
+	/**
+	 * Affiche la totalité des combinaisons (entrées, sorties) possibles
+	 * @param c un circuit à tester
+	 * @require CircuitFerme : c.evaluable()
+	 */
+	public static void tester(Circuit c) throws Require{
+		if(!(c.evaluable())){
+			throw new Require("tester : CircuitFerme");
+		}
+		CircuitFerme Cf =new CircuitFerme(c);
+		
 		
 	}
 	
