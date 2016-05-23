@@ -15,14 +15,14 @@ public class CoupleES{
 	private List<Boolean> Sorties;
 	
 	public CoupleES(int nbe, int nbs){
-		Entrees = new ArrayList<Boolean>();
-		Sorties = new ArrayList<Boolean>();
+		this.Entrees = new ArrayList<Boolean>();
+		this.Sorties = new ArrayList<Boolean>();
 		nbE = nbe;
 		nbS = nbs;
-		for (int i = 0; i < Entrees.size(); i++) {
+		for (int i = 0; i < nbE; i++) {
 			ajouterEntree(false);
 		}
-		for (int i = 0; i < Sorties.size(); i++) {
+		for (int i = 0; i < nbS; i++) {
 			ajouterSortie(false);
 		}
 		_invariant();
@@ -60,10 +60,10 @@ public class CoupleES{
 	}
 
 	private void ajouterEntree(Boolean b){
-		Entrees.add(b);
+		this.Entrees.add(b);
 	}
 	private void ajouterSortie(Boolean b){
-		Sorties.add(b);
+		this.Sorties.add(b);
 	}
 	
 	public void modifierEntree(int i,Boolean b){
@@ -75,6 +75,7 @@ public class CoupleES{
 	
 	public String toString(){
 		String s ="|";
+		
 		for(Boolean b : Entrees){
 			if(b){
 				s = s + " 1 |";
@@ -92,7 +93,7 @@ public class CoupleES{
 		return s;
 	}
 	private void _invariant() throws Invariant{
-		if(!(nbE==Entrees.size()&&nbS==Sorties.size())){
+		if(!((nbE==Entrees.size())&&(nbS==Sorties.size()))){
 			throw new Invariant("Bonne taille");
 		}
 	}

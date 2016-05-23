@@ -73,9 +73,9 @@ public class TestOuX {
 		c.ajouter(l,4);
 		
 		// On les connecte entre eux
-		c.connecter(1, 0, 3, 0); // interrupteur1 --> oux
-		c.connecter(2, 0, 3, 1); // interrupteur2 --> oux
-		c.connecter(3, 0, 4, 0); // Oux --> led
+		c.connecter(1, 1, 3, 1); // interrupteur1 --> oux
+		c.connecter(2, 1, 3, 2); // interrupteur2 --> oux
+		c.connecter(3, 1, 4, 1); // Oux --> led
 		
 		tester(c);
 
