@@ -93,23 +93,17 @@ public class CircuitFerme extends Circuit {
 		
 	}
 	
-	/**
-	 * @require ComposantsExistent : numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie < listeOperateur.size() && numComposantEntree < listeOperateur.size()
-	 * @require PortEntreeExiste : numPortEntree >= 0 && numPortEntree < composantEntree.listeEntrees.size()
-	 * @require PortEntreeLibre : portEntree.estLibre()
-	 * @require PortSortieExiste : numPortSortie >= 0 && numPortSortie < composantSortie.listeSorties.size()
-	 * @require ConnexionExistePas : portSortie.getEntrees().contains(portEntree)
-	 * @param numComposantSortie Numéro du composant dont on veut la sortie
-	 * @param numPortSortie Port de sortie de numComposantSortie à connecter
-	 * @param numComposantEntree Numéro du composant en entrée
-	 * @param numPortEntree Port d'entrée de numComposantEntree à connecter
-	 */
+	
 	@Override
 	public void connecter(int numComposantSortie, int numPortSortie, int numComposantEntree, int numPortEntree){
 		super.connecter(numComposantSortie, numPortSortie, numComposantEntree, numPortEntree);
 		if(_invariant()) throw new Invariant("CircuitFerme");
 	}
-
+	
+	/**
+	 * Invariant de la classe. Un circuit ferme doit toujours être évaluable
+	 * @return vrai si le circuit est evaluable, faux sinon.
+	 */
 	private boolean _invariant() {
 		return this.evaluable();
 		

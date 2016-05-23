@@ -42,6 +42,7 @@ public class Circuit implements _Circuit {
 	}
 
 	/**
+	 * Fonction permettant de connecter deux composant dans un circuit via leurs numéros de port.
 	 * @require ComposantsExistent : numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie < listeOperateur.size() && numComposantEntree < listeOperateur.size()
 	 * @require PortEntreeExiste : numPortEntree >= 0 && numPortEntree < composantEntree.listeEntrees.size()
 	 * @require PortEntreeLibre : portEntree.estLibre()
