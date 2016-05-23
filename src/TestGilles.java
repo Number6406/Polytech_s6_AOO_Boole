@@ -3,6 +3,11 @@ public class TestGilles {
 
 	public static void main(String[] args) {
 		
+		testAdd1b();
+		
+	}
+	
+	public static void testAdd3b() {
 		Circuit test = new Circuit();
 
 		Itr i1 = new Itr();
@@ -41,6 +46,44 @@ public class TestGilles {
 		i2.ItrHaut();
 		testF.evaluer();
 		System.out.println("L1 : " + l1.etatRecepteur() + " L2 : " + l2.etatRecepteur());
+	}
+	
+	public static void testAdd1b() {
+		Circuit test = new Circuit();
+
+		Itr a = new Itr();
+		Itr b = new Itr();
+		Itr ce = new Itr();
+		
+		test.ajouter(a, 1);
+		test.ajouter(b, 2);
+		test.ajouter(ce, 3);
+		
+		test.ajouter(new Add1b(), 4);
+		
+		Led s = new Led();
+		Led cs = new Led();
+		
+		test.ajouter(s, 5);
+		test.ajouter(cs, 6);
+
+		test.connecter(1, 1, 4, 1);
+		test.connecter(2, 1, 4, 2);
+		test.connecter(3, 1, 4, 3);
+		test.connecter(4, 1, 5, 1);
+		test.connecter(4, 2, 6, 1);
+		
+		CircuitFerme testF = new CircuitFerme(test);
+		
+		testF.evaluer();
+		System.out.println("A : " + a.etatGenerateur() + " B : " + b.etatGenerateur() + " CE : " + ce.etatGenerateur() + " ; S : " + s.etatRecepteur() + "  CS : " + cs.etatRecepteur() + "\n");
+		
+		a.ItrHaut();
+		//b.ItrHaut();
+		ce.ItrHaut();
+		testF.evaluer();
+		System.out.println("A : " + a.etatGenerateur() + " B : " + b.etatGenerateur() + " CE : " + ce.etatGenerateur() + " ; S : " + s.etatRecepteur() + "  CS : " + cs.etatRecepteur() + "\n");
+		
 		
 	}
 	

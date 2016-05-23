@@ -17,7 +17,7 @@ public class Add1b extends Composite {
 		
 		//entrées composant 2 : c1 OUX pe3
 		this.connecter(1, 1, 2, 1);
-		this.connecterEntre(3, 2, 1);
+		this.connecterEntre(3, 2, 2);
 		
 		//entrées composant 3 : pe3 ET c1
 		this.connecterEntre(3, 3, 1);
