@@ -1,3 +1,6 @@
+import Circuit.Circuit;
+import Composite.Composite;
+
 public class Charger_Sauvegarder {
 	public static Circuit lireUnFichier(String nomFichier)
 	{

@@ -13,8 +13,12 @@ SORTIE_ENTRE :"#".NUM."(".(NUM"#".NUM.[","].")"*)|"#".NUM."(".("#".NUM.[","].")"
 options{STATIC=false;}
 
 PARSER_BEGIN(Reader)
+	package Reader;
 	import java.util.TreeMap;
 	import java.util.Map;
+	import Circuit.*;
+	import Composant.*;
+	import Composite.*;
 	public class Reader {
 		public _Circuit read() throws Exception {return CIRCUIT();}
 		public Composite readComposite() throws Exception {
