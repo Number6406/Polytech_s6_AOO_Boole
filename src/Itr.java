@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import jus.util.assertion.Invariant;
 import jus.util.assertion.Require;
@@ -61,6 +62,34 @@ public class Itr extends $Generateur{
 		}
 		s = s+"#"+j+listeSorties.get(j).toString();
 		return s;
+	}
+
+	@Override
+	public Iterator<Void> iterator() {
+		Iterator<Void> I = new Iterator<Void>() {
+			
+			int i = 0;
+			
+			@Override
+			public Void next() {
+				if(etatGenerateur()){
+					ItrBas();
+				}else{
+					ItrHaut();
+				}
+				i++;
+				return null;
+			}
+			
+			@Override
+			public boolean hasNext() {
+				if(i==0){
+				return true;
+				}
+				return false;
+			}
+		};
+		return I;
 	}
 	
 }

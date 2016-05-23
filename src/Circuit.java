@@ -111,9 +111,25 @@ public class Circuit implements _Circuit {
 
 	public String toString() 
 	{
-		int i;
 		String listeCompo, debutCiruit;
-		debutCiruit = "Nom[";
+		debutCiruit = "Nom_Inconnu[";
+		listeCompo = "";
+		for(Map.Entry<Integer,$Composant> entry : this.listeOperateur.entrySet())
+		{
+			listeCompo = listeCompo + "<"+entry.getKey()+"|"+entry.getValue().toString()+">\n";
+		}
+		return debutCiruit+"\n"+listeCompo+"]";
+	}
+	
+	/**
+	 * toString avec un paramètre (le nom du circuit)
+	 * @param nom, le nom du circuit
+	 * @return la description textuelle du circuit
+	 */
+	public String toString(String nom) 
+	{
+		String listeCompo, debutCiruit;
+		debutCiruit = nom+"[";
 		listeCompo = "";
 		for(Map.Entry<Integer,$Composant> entry : this.listeOperateur.entrySet())
 		{
