@@ -95,8 +95,7 @@ _Circuit CIRCUIT() throws Exception:
 			(LOOKAHEAD(10)
 		  	compo = COMPOSANT(listeConnexion)|compo = COMPOSITE(type, listeConnexion)
 		  	)
-		  	{ System.out.println("Numero composant"+compo.getNum()+" composant : "+compo);
-		  	  circuit.ajouter(compo,compo.getNum());}
+		  	{circuit.ajouter(compo,compo.getNum());}
 		)*
 		<C_FERME>
 
@@ -134,8 +133,7 @@ $Composant COMPOSANT(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>
 	
 	$Composant compo;
 }
-{
-	{System.out.println("Lire Composant");}  	
+{	
 	/**Indice*/
 	<P_OUVERT>  
 	indice = Nombre()
@@ -163,9 +161,7 @@ $Composant COMPOSANT(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>
 	  ENTRE_SORTIE(sortie)
 	)*
 	<P_FERME>
-	{
-	  
-	  co.put(indice,sortie);return compo;}
+	{co.put(indice,sortie);return compo;}
 }
 
 
@@ -234,27 +230,20 @@ $Composant COMPOSITE(String type,TreeMap <Integer,TreeMap<Integer,TreeMap<Intege
   	)*
 	<P_FERME>
 	
-	
-	
 	/**Lien du composite*/
 	{
 		//Connecter les port d'entrées
-		System.out.println("Nombre de composant : "+compo.nbComposant());
 		for(i = 1; i < nb_entrees+1; i++)
 		{
-			System.out.println("Nombre Entre : "+i);
 			for(Map.Entry<Integer,Integer> entry : connexionEntre.get(i).entrySet())
 	  		{ 				
-				System.out.println("compo entre : "+entry.getKey()+" Compo sortie : "+entry.getValue());
-				compo.connecterEntre(entry.getKey(),i,entry.getValue());
-				
+				compo.connecterEntre(i,entry.getKey(),entry.getValue());
 	  		}
 		}
 		//Lier les coposant entre eux
 		//Pour chaque composant
 		for(i = 1; i <listeConnexion.size()+1; i++)
 		{
-			System.out.println("Numéro Composant : "+i);
 			//Obtenir liste des connexion sortie
 			s = listeConnexion.get(i);
 			
@@ -264,16 +253,15 @@ $Composant COMPOSITE(String type,TreeMap <Integer,TreeMap<Integer,TreeMap<Intege
 				//entry.getKey() = numPort de sortie
 		  	  	for(Map.Entry<Integer,Integer> entry2 : entry.getValue().entrySet())
 		  		{ //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
-		  		
+
 		  		  if(entry2.getKey() == -1)//Connexion sortie
-		  		  { compo.connecterSortie(i,entry2.getValue(),entry.getKey()); }
+		  		  { compo.connecterSortie(i,entry.getKey(),entry2.getValue()); }
 		  		  //Connexion normale
-				  else { compo.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
+				  else {compo.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
 		  		}
 		  	}
 		}
 		co.put(compo.getNum(),connexionSortie);
-		System.out.println("=====================================");
 		return compo;
 	}
 }
