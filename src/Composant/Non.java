@@ -36,7 +36,7 @@ public class Non extends $Transformateur {
 	 */
 	public void calculer() throws Require{
 		// REQUIRE
-		if(!(listeEntrees.get(0).estLibre())){
+		if((listeEntrees.get(0).estLibre())){
 			throw new Require("Non : PortsEntree non Connectes");
 		}
 		
