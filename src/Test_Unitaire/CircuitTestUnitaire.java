@@ -24,8 +24,8 @@ public class CircuitTestUnitaire {
 	 */
 	public static void main(String[] args) {
 		
-		$Composant compo = new Oux();
-		Circuit c1 = creerCircuit(compo);		
+		$Composant compo = new Non();
+		Circuit c1 = creerCircuit(compo);
 		tester(c1);
 	}
 	
@@ -156,7 +156,8 @@ public class CircuitTestUnitaire {
 		// Affichage des solutions
 		System.out.println(Tab.toString());
 		// Affichage du circuit
-		System.out.println(cf.toString());
+		String s = "Circuit_Test";
+		System.out.println(cf.toString(s));
 	}
 	
 	/**

@@ -1,8 +1,11 @@
 package Test;
 
+import java.io.FileInputStream;
+
+import BaseComposite.Lecture;
 import Circuit.*;
 import Composant.*;
-import Composite.*;
+import Reader.Reader;
 import Test_Unitaire.CircuitTestUnitaire;
 
 public class MainAlicia {
