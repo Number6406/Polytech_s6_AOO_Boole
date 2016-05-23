@@ -21,7 +21,7 @@ public class Ou extends $Transformateur {
 		
 		this.listeEntrees.add(0,new PortEntree(1));
 		this.listeEntrees.add(1,new PortEntree(2));
-		this.listeSorties.add(0,new PortSortie(3));
+		this.listeSorties.add(0,new PortSortie(1));
 		_invariant();
 	}
 	

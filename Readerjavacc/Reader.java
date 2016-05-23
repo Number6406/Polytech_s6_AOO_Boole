@@ -69,6 +69,7 @@
           throw new ParseException();
         }
       }
+                          System.out.println("Numero composant"+compo.getNum()+" composant : "+compo);
                           circuit.ajouter(compo,compo.getNum());
     }
     jj_consume_token(C_FERME);
@@ -83,8 +84,8 @@
                                 {
                                         //entry.getKey() = numPort de sortie
                                         for(Map.Entry<Integer,Integer> entry2 : entry.getValue().entrySet())
-                                        { //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
-                                          circuit.connecter(i-1,entry.getKey()-1,entry2.getKey()-1,entry2.getValue()-1);
+                                        { //entry2.getKey() = compoENtre, entry2.getValues() = portEntre		  		
+                                                circuit.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue());
                                         }
                                 }
                         }
@@ -105,7 +106,6 @@
          System.out.println("Lire Composant");
     jj_consume_token(P_OUVERT);
     indice = Nombre();
-         System.out.println("Indice compo : "+indice);
     jj_consume_token(SEPARATEUR);
     type = Nom();
     compo = TYPE(type);
@@ -274,21 +274,21 @@
     jj_consume_token(P_FERME);
                 //Connecter les port d'entrées
                 System.out.println("Nombre de composant : "+compo.nbComposant());
-                for(i = 1; i <nb_entrees; i++)
+                for(i = 1; i < nb_entrees+1; i++)
                 {
-                        System.out.println("Indice : "+i);
+                        System.out.println("Nombre Entre : "+i);
                         for(Map.Entry<Integer,Integer> entry : connexionEntre.get(i).entrySet())
                         {
-                                System.out.println("Nb portComposant : "+compo.getComposant(entry.getKey()).nombreEntrees());
-
-                                compo.connecterEntre(entry.getKey(),i,entry.getValue()-1);
+                                System.out.println("compo entre : "+entry.getKey()+" Compo sortie : "+entry.getValue());
+                                compo.connecterEntre(entry.getKey(),i,entry.getValue());
 
                         }
                 }
                 //Lier les coposant entre eux
                 //Pour chaque composant
-                for(i = 1; i <listeConnexion.size(); i++)
+                for(i = 1; i <listeConnexion.size()+1; i++)
                 {
+                        System.out.println("Num\u00e9ro Composant : "+i);
                         //Obtenir liste des connexion sortie
                         s = listeConnexion.get(i);
 
@@ -300,13 +300,14 @@
                                 { //entry2.getKey() = compoENtre, entry2.getValues() = portEntre
 
                                   if(entry2.getKey() == -1)//Connexion sortie
-                                  { compo.connecterSortie(i,entry2.getValue()-1,entry.getKey()); }
+                                  { compo.connecterSortie(i,entry2.getValue(),entry.getKey()); }
                                   //Connexion normale
-                                  else { compo.connecter(i,entry.getKey()-1,entry2.getKey(),entry2.getValue()-1); }
+                                  else { compo.connecter(i,entry.getKey(),entry2.getKey(),entry2.getValue()); }
                                 }
                         }
                 }
                 co.put(compo.getNum(),connexionSortie);
+                System.out.println("=====================================");
                 {if (true) return compo;}
     throw new Error("Missing return statement in function");
   }
