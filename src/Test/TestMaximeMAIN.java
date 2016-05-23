@@ -4,9 +4,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
+import java.util.TreeMap;
 
-
-
+import BaseComposite.Lecture;
 import Reader.Reader;
 import Circuit.Circuit;
 import Circuit.CircuitFerme;
@@ -16,6 +17,7 @@ import Composant.Itr;
 import Composant.Led;
 import Composant.Ou;
 import Composant.Vcc;
+import Composite.Composite;
 
 public class TestMaximeMAIN {
 
@@ -99,7 +101,7 @@ public class TestMaximeMAIN {
 		System.out.println(cF2.evaluer());
 		System.out.println("La LED est : "+ ledR.etatRecepteur());
 		
-		File fichierCircuit = new File(cheminFichier+"/circuit1.txt");
+		/*File fichierCircuit = new File(cheminFichier+"/circuit1.txt");
 		try 
 		{
 			//Reader2 read = new Reader2(new FileInputStream(fichierCircuit));
@@ -113,6 +115,13 @@ public class TestMaximeMAIN {
 			System.out.println("Ouuups");
 			e.printStackTrace();
 		}
+		
+		TreeMap<String,Composite> liste = Lecture.lectureComposite(cheminFichier+"/Base.txt");
+		int i =0;
+		for(Map.Entry<String, Composite> entry: liste.entrySet())
+		{
+			System.out.println(entry.getKey()+"====> "+entry.getValue());
+		}*/
 		
 	}
 

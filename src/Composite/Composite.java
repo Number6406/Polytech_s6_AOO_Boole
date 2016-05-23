@@ -53,19 +53,6 @@ public class Composite extends $Composant implements _Composite{
 		if(i-1>=this.nombreEntrees()){throw new Require("Taille");}
 		return this.listeEntreInterne.get(i-1);
 	}
-
-	//METTRE A JOUR LES VALEURS DES PORTS PAS SURE QUE SE SOIT UTILE
-	/*public void mettreAJourPortEntre(int numPort, boolean Valeur )
-	{ 
-		this.accederPortEntre(numPort).majValeur(valeur);
-		this.getPortEntreInterne(numPort).majValeur(valeur);
-	}
-	
-	public void mettreAJourPortSortie(int numPort, boolean Valeur )
-	{
-		this.accederPortSortie(numPort).majValeur(valeur);
-		this.getPortSortieInterne(numPort).majValeur(valeur);
-	}*/	
 	
 	/**Ajouter un composant au circuit interne*/
 	public void ajouter($Composant nouveauComposant, int numeroComposant) 
@@ -193,6 +180,15 @@ public class Composite extends $Composant implements _Composite{
 			if(valeur!=-1) return false;
 		}
 		return true;
+	}
+	
+	public Composite duplicate()
+	{
+		try 
+		{
+			return ((Composite) this.clone());
+		} catch (CloneNotSupportedException e) {e.printStackTrace();}
+		return null;
 	}
 	
 	public String toString() {

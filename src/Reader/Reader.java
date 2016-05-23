@@ -7,9 +7,8 @@
         import Composite.*;
         public class Reader implements ReaderConstants {
                 public _Circuit read() throws Exception {return CIRCUIT();}
-                public Composite readComposite() throws Exception {
-                        TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co = new TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>();
-                        return ((Composite) COMPOSITE(co));}
+                public TreeMap<String,Composite> readComposite() throws Exception {
+                        return LISTECOMPOSITE();}
 
   final public int Nombre() throws ParseException, Exception {
   Token t;
@@ -378,6 +377,28 @@
          listeCo.put(port,liste);
   }
 
+  final public TreeMap<String,Composite> LISTECOMPOSITE() throws ParseException, Exception {
+        String nom;
+        TreeMap<String,Composite> listeComposant = new TreeMap<String,Composite>();
+        $Composant compo;
+        TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co = new TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>();
+    label_10:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case P_OUVERT:
+        ;
+        break;
+      default:
+        jj_la1[18] = jj_gen;
+        break label_10;
+      }
+      compo = COMPOSITE(co);
+         listeComposant.put(compo.obtenirType(),((Composite) compo));
+    }
+         {if (true) return listeComposant;}
+    throw new Error("Missing return statement in function");
+  }
+
   private boolean jj_2_1(int xla) {
     jj_la = xla; jj_lastpos = jj_scanpos = token;
     try { return !jj_3_1(); }
@@ -392,65 +413,65 @@
     finally { jj_save(1, xla); }
   }
 
-  private boolean jj_3R_15() {
-    if (jj_3R_16()) return true;
+  private boolean jj_3R_16() {
+    if (jj_3R_17()) return true;
     return false;
   }
 
-  private boolean jj_3R_16() {
+  private boolean jj_3R_17() {
     if (jj_scan_token(HASHTAG)) return true;
     return false;
   }
 
-  private boolean jj_3R_11() {
+  private boolean jj_3R_12() {
     if (jj_scan_token(NUM)) return true;
     return false;
   }
 
-  private boolean jj_3R_10() {
+  private boolean jj_3R_11() {
     if (jj_scan_token(P_OUVERT)) return true;
-    if (jj_3R_11()) return true;
+    if (jj_3R_12()) return true;
+    if (jj_scan_token(SEPARATEUR)) return true;
+    if (jj_3R_13()) return true;
+    if (jj_3R_14()) return true;
+    if (jj_scan_token(P_OUVERT)) return true;
+    if (jj_3R_12()) return true;
     if (jj_scan_token(SEPARATEUR)) return true;
     if (jj_3R_12()) return true;
-    if (jj_3R_13()) return true;
-    if (jj_scan_token(P_OUVERT)) return true;
-    if (jj_3R_11()) return true;
-    if (jj_scan_token(SEPARATEUR)) return true;
-    if (jj_3R_11()) return true;
     if (jj_scan_token(P_FERME)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_14()) jj_scanpos = xsp;
+    if (jj_3R_15()) jj_scanpos = xsp;
     xsp = jj_scanpos;
     if (jj_scan_token(13)) jj_scanpos = xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_15()) { jj_scanpos = xsp; break; }
+      if (jj_3R_16()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(P_FERME)) return true;
     return false;
   }
 
   private boolean jj_3_1() {
-    if (jj_3R_10()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_13() {
+    if (jj_3R_11()) return true;
     return false;
   }
 
   private boolean jj_3R_14() {
+    return false;
+  }
+
+  private boolean jj_3R_15() {
     if (jj_scan_token(P_OUVERT)) return true;
     return false;
   }
 
   private boolean jj_3_2() {
-    if (jj_3R_10()) return true;
+    if (jj_3R_11()) return true;
     return false;
   }
 
-  private boolean jj_3R_12() {
+  private boolean jj_3R_13() {
     if (jj_scan_token(ID)) return true;
     return false;
   }
@@ -466,13 +487,13 @@
   private Token jj_scanpos, jj_lastpos;
   private int jj_la;
   private int jj_gen;
-  final private int[] jj_la1 = new int[18];
+  final private int[] jj_la1 = new int[19];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x200,0x200,0x200,0x2000,0x8000,0x8000,0x4000,0x200,0x200,0x200,0x2000,0x8000,0x4000,0x4000,0x8000,0x4000,0x20,0x8020,};
+      jj_la1_0 = new int[] {0x200,0x200,0x200,0x2000,0x8000,0x8000,0x4000,0x200,0x200,0x200,0x2000,0x8000,0x4000,0x4000,0x8000,0x4000,0x20,0x8020,0x200,};
    }
   final private JJCalls[] jj_2_rtns = new JJCalls[2];
   private boolean jj_rescan = false;
@@ -489,7 +510,7 @@
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -504,7 +525,7 @@
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -515,7 +536,7 @@
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -526,7 +547,7 @@
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -536,7 +557,7 @@
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -546,7 +567,7 @@
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 18; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 19; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -663,7 +684,7 @@
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 18; i++) {
+    for (int i = 0; i < 19; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
