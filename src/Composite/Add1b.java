@@ -6,6 +6,9 @@ import Composant.Oux;
 
 public class Add1b extends Composite {
 	
+	/**
+	 * Creer un Additionneur 1 bit
+	 */
 	public Add1b() {
 		super(3, 2, "Add1b");
 		

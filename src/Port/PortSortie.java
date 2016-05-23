@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import jus.util.assertion.Require;
 
 /**@invariant : ????*/
-public class PortSortie extends $Port 
+public class PortSortie extends $Port implements Cloneable 
 {
 	private ArrayList<PortEntree> listeEntree;
 	
@@ -17,6 +17,8 @@ public class PortSortie extends $Port
 		this.numero = num;
 	}
 	
+	
+	
 	public PortSortie(boolean val, boolean l , ArrayList<PortEntree> liste, int num)
 	{
 		this.majValeur(val);
@@ -26,6 +28,10 @@ public class PortSortie extends $Port
 		this.numero = num;
 	}
 	
+	/**
+	 * Ajoute une connexion avec un port d'entree
+	 * @param e le port d'entr�e � connecter � ce port de sortie.
+	 */
 	public void add(PortEntree e)
 	{
 		this.listeEntree.add(e);
@@ -33,7 +39,25 @@ public class PortSortie extends $Port
 		this.reserver();
 	}
 	
-	//#TODO v�rifier que le port est dans la liste (si i==taille retrouner une erreur)
+	/**Permet de dupliquer le port courant
+	 * @return portSortie identique au port courant*/
+	public PortSortie clone()
+	{
+		PortSortie e = new PortSortie(this.numero);	
+		e.majValeur(this.obtenirValeur());
+		if(this.estLibre()){e.liberer();}
+		else{e.reserver();}
+		e.ajouterNumComposant(this.obtenirNumComposant());
+		e.listeEntree = (ArrayList<PortEntree>) this.listeEntree.clone();
+		return e;
+	}
+	
+	/**
+	 * Permet de supprimer la connection avec un port d'entr�e.
+	 * @param e le port d'entr�e � deconnecter
+	 * @return le port d'entr�e d�connect�.
+	 * @require PortEntree est connect� au port de sortie
+	 */
 	public PortEntree enleverUneSortie(PortEntree e)
 	{
 		PortEntree p;
@@ -41,18 +65,25 @@ public class PortSortie extends $Port
 		int i = 0;
 		while((i<taille)&(e!=this.listeEntree.get(i)))
 		{i++;}
+		if(i==taille) throw new Require ("PortSortie : Le port � enlever n'existe pas");
 		p = this.listeEntree.get(i);
 		this.listeEntree.remove(i);
 		return p;
 	}
 	
-	public PortEntree chercher(PortEntree e)
+	/**
+	 * Cherche si un port d'entree est connect� 
+	 * @param e Le port a verifier
+	 * @return true si les deux ports sont connect�, false sinon.
+	 */
+	public boolean chercher(PortEntree e)
 	{
 		int taille = this.listeEntree.size();
 		int i = 0;
 		while((i<taille)&(e!=this.listeEntree.get(i)))
 		{i++;}
-		return this.listeEntree.get(i);
+		if(i==taille) return false;
+		return true;
 	}
 	
 	/**@require : indice < taille*/
@@ -63,11 +94,19 @@ public class PortSortie extends $Port
 		return this.listeEntree.get(indice);
 	}
 	
+	/**
+	 * 
+	 * @return les ports d'entr�es connect� � ce port.
+	 */
 	public ArrayList<PortEntree> getEntrees()
 	{
 		return this.listeEntree;
 	}
 	
+	/**
+	 * retourne le nombre de port d'entr�es connect� � ce port.
+	 * @return
+	 */
 	public int getNombreEntrees()
 	{
 		return this.listeEntree.size();

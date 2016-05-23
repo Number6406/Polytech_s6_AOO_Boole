@@ -5,6 +5,7 @@ import java.util.Map;
 import Circuit.*;
 import Composant.*;
 import Composite.*;
+import BaseComposite.*;
 
 /** Token Manager. */
 public class ReaderTokenManager implements ReaderConstants

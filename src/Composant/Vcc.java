@@ -13,6 +13,9 @@ import jus.util.assertion.Require;
  */
 public class Vcc extends $Generateur{
 	
+	/**
+	 * Constructeur d'un générateur de niveau haut
+	 */
 	public Vcc(){
 		this.nomType = "VCC";
 		this.etat = true;
@@ -24,7 +27,10 @@ public class Vcc extends $Generateur{
 		_invariant();
 	}
 	
-	/* Propagation de la valeur */
+	/**
+	 * Permet de propager la valeur du Vcc aux ports connecté à celui-ci
+	 * @require (listeSorties.size() > 0)
+	 */
 	public void calculer() throws Require{
 		if(!(listeSorties.size() > 0)){
 			throw new Require("Vcc : Port de Sortie non existant");

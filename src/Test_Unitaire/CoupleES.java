@@ -84,6 +84,7 @@ public class CoupleES{
 				s = s + " 0 |";
 			}
 		}
+		s= s+"|";
 		for(Boolean b : Sorties){
 			if(b){
 				s = s + " 1 |";

@@ -31,6 +31,7 @@ public class Extension{
 		for (int i = 0; i < nbE; i++) {
 			s = s + " E" + (i+1) +"|";
 		}
+		s = s+"|";
 		for (int i = 0; i < nbS; i++) {
 			s = s + " S" + (i+1) +"|";
 		}

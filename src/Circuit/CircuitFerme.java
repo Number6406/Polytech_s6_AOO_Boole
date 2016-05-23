@@ -1,20 +1,30 @@
 package Circuit;
+import Composant.$Composant;
 import Port.PortEntree;
 import Port.PortSortie;
+import jus.util.assertion.Invariant;
 import jus.util.assertion.Require;
 
 public class CircuitFerme extends Circuit {
 	
-	
+	/**
+	 * Constructeur de la classe CircuitFerme.
+	 * @param Un circuit
+	 * @require c.evaluable()
+	 */
 	public CircuitFerme (Circuit c)
 	{
 		if(c.evaluable()) this.listeOperateur = c.listeOperateur;
 		else throw new Require("CircuitFerme : Require Constructeur");
 	}
+	
+	
+	/**
+	 * Fonction permettant d'evaluer un circuit
+	 * @return true, si l'evaluation a fonctionné.
+	 */
 	public boolean evaluer() {
-		//#TODO Attention a l'ordre des composants !!!
 		//#TODO chercher les cas d'erreurs !
-		//Normalement si on est ici c'est que le circuit est evaluable
 		
 		//On creer deux tableaux pour avoir les nb entree de chaque composant
 		int nbEntree[] = new int[listeOperateur.size()+1]; 
@@ -59,6 +69,11 @@ public class CircuitFerme extends Circuit {
 		return true;
 	}
 	
+	/**
+	 * Fonction permettant de savoir si on a calcule tous les composants
+	 * @param entree le tableau contenant le nombre d'entrée restante a calculer par composant
+	 * @return true, si tout a été calculé. false sinon.
+	 */
 	private boolean toutCalcule(int[] entree)
 	{
 		for(int valeur : entree)
@@ -71,6 +86,28 @@ public class CircuitFerme extends Circuit {
 	
 	//#TODO Invariant : modification -> toujours evaluable
 	
+	@Override
+	public void ajouter($Composant nouveauComposant, int numeroComposant) {
+		super.ajouter(nouveauComposant, numeroComposant);
+		if(_invariant()) throw new Invariant("CircuitFerme");
+		
+	}
+	
+	
+	@Override
+	public void connecter(int numComposantSortie, int numPortSortie, int numComposantEntree, int numPortEntree){
+		super.connecter(numComposantSortie, numPortSortie, numComposantEntree, numPortEntree);
+		if(_invariant()) throw new Invariant("CircuitFerme");
+	}
+	
+	/**
+	 * Invariant de la classe. Un circuit ferme doit toujours être évaluable
+	 * @return vrai si le circuit est evaluable, faux sinon.
+	 */
+	private boolean _invariant() {
+		return this.evaluable();
+		
+	}
 	
 
 }

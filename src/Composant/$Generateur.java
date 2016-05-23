@@ -6,10 +6,17 @@ public abstract class $Generateur extends $Composant implements Iterable<Void>{
 
 	protected boolean etat;
 	
+	/**
+	 * 
+	 * @return l'état du générateur
+	 */
 	public boolean etatGenerateur() {
 		return this.etat;
 	}
 	
+	/**
+	 * Retourne un iterateur sur le generateur
+	 */
 	@Override
 	public Iterator<Void> iterator() {
 		
