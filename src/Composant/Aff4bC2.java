@@ -3,22 +3,24 @@ package Composant;
 import java.util.ArrayList;
 
 import Port.PortEntree;
+import Port.PortSortie;
 
-public class Aff4bC2 extends $Generateur {
+public class Aff4bC2 extends $Recepteur {
 
 	int valeur;
 	
-	public public Aff4bC2() {
+	public Aff4bC2() {
 		this.nomType = "Aff4bC2";
 		this.etat = false;
 		this.listeEntrees = new ArrayList<>();
 		this.listeSorties = new ArrayList<>();
 
 		this.listeEntrees.add(0, new PortEntree(1));
-		this.listeEntrees.add(0, new PortEntree(2));
-		this.listeEntrees.add(0, new PortEntree(3));
-		this.listeEntrees.add(0, new PortEntree(4));
-		this.listeEntrees.add(0, new PortEntree(5));
+		this.listeEntrees.add(1, new PortEntree(2));
+		this.listeEntrees.add(2, new PortEntree(3));
+		this.listeEntrees.add(3, new PortEntree(4));
+		
+		this.listeSorties.add(0, new PortSortie(1));
 	}
 	
 	@Override
@@ -38,6 +40,10 @@ public class Aff4bC2 extends $Generateur {
 		String strBinaire = tabBinaire.toString();
 		int valeur = Integer.parseInt(strBinaire);
 		
+	}
+	
+	public String toString() {
+		return(this.nomType+"("+this.nombreEntrees()+","+this.nombreSorties()+"){" + valeur + "}");
 	}
 
 }
