@@ -48,6 +48,10 @@ public class Circuit implements _Circuit {
 //			throw new Require("ComposantsExistent");
 //		}
 		
+		numPortEntree-=1;
+		numPortSortie-=1;
+		
+		
 		//celle ci prend en compte si les composant commence a 1 et se suivent (mais ne verifie pas qu'ils se suivent)
 		if(!(numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie <= listeOperateur.size() && numComposantEntree <= listeOperateur.size())) {
 			throw new Require("ComposantsExistent");

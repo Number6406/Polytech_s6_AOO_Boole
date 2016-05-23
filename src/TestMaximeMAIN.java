@@ -9,7 +9,7 @@ public class TestMaximeMAIN {
 	public static void main(String[] args) {
 		
 		String cheminFichier = (new File("")).getAbsolutePath()+"/File";
-		Circuit c = new Circuit();
+		/*Circuit c = new Circuit();
 		Led l = new Led();
 		Non n = new Non();
 		n.listeEntrees.get(0).majValeur(false);
@@ -37,11 +37,11 @@ public class TestMaximeMAIN {
 		
 		c2.ajouter(n2, 0);
 		c2.ajouter(l2, 1);
-		c2.connecter(0, 0, 1, 0);
+		c2.connecter(1, 1, 2, 1);
 		
 		evaluable = c2.evaluable();
 		System.out.println(evaluable);
-		
+		*/
 		
 		//Creation circuit plus complexe
 		Vcc compo1 = new Vcc();
@@ -64,15 +64,15 @@ public class TestMaximeMAIN {
 		c3.ajouter(compo8, 8);
 		
 		//Branchements
-		c3.connecter(1, 0, 5, 0);
-		c3.connecter(1, 0, 7, 1);
-		c3.connecter(4, 0, 3, 0);
-		c3.connecter(6, 0, 3, 1);
-		c3.connecter(6, 0, 7, 0);
-		c3.connecter(3, 0, 5, 1);
-		c3.connecter(5, 0, 2, 0);
-		c3.connecter(7, 0, 2, 1);
-		c3.connecter(2, 0, 8, 0);
+		c3.connecter(1, 1, 5, 1);
+		c3.connecter(1, 1, 7, 2);
+		c3.connecter(4, 1, 3, 1);
+		c3.connecter(6, 1, 3, 2);
+		c3.connecter(6, 1, 7, 1);
+		c3.connecter(3, 1, 5, 2);
+		c3.connecter(5, 1, 2, 1);
+		c3.connecter(7, 1, 2, 2);
+		c3.connecter(2, 1, 8, 1);
 		
 		System.out.println(c3.evaluable());
 		
