@@ -34,26 +34,18 @@ public class Composite extends $Composant implements _Composite{
 	}
 	
 	//ACCEDER AU PORTS ENTRE ET SORTIE INTERNE
-	/**@Require : i <= nombreSorties()*/
+	/**@Require : i < nombre sortie*/
 	public PortEntree getPortSortieInterne(int i) throws Require
 	{
-<<<<<<< HEAD
 		
 		if(i-1>=this.nombreSorties()){throw new Require("Taille");}
-=======
-		if(i>this.nombreSorties()){throw new Require("Taille");}
->>>>>>> branch 'master' of https://github.com/Number6406/Polytech_s6_AOO_Boole.git
 		return this.listeSortieInterne.get(i-1);
 	}
 
-	/**@Require : i <= nombreEntrees()*/
+	/**@Require : i < nombre entre*/
 	public PortSortie getPortEntreInterne(int i) throws Require
 	{
-<<<<<<< HEAD
 		if(i-1>=this.nombreEntrees()){throw new Require("Taille");}
-=======
-		if(i>this.nombreEntrees()){throw new Require("Taille");}
->>>>>>> branch 'master' of https://github.com/Number6406/Polytech_s6_AOO_Boole.git
 		return this.listeEntreInterne.get(i-1);
 	}
 
@@ -79,13 +71,13 @@ public class Composite extends $Composant implements _Composite{
 	{this.circuit_interne.connecter(numComposantSortie, numPortSortie, numComposantEntree, numPortEntree);}
 	
 	/**Connecter une entre à un composant*/
-	public void connecterEntre(int numEntre, int numComposantEntre, int portEntreCompo)
+	public void connecterEntre(int numComposantEntre, int numEntre, int portEntreCompo)
 	{ 
 		this.getPortEntreInterne(numEntre).add(circuit_interne.getComposant(numComposantEntre).accederPortEntre(portEntreCompo));
 	}
 	
 	/**Connecter un composant à une sortie*/
-	public void connecterSortie(int numComposantSortie, int portSortieCompo, int numSortie)
+	public void connecterSortie(int numComposantSortie, int numSortie, int portSortieCompo)
 	{
 		circuit_interne.getComposant(numComposantSortie).accederPortSortie(portSortieCompo).add(this.getPortSortieInterne(numSortie));
 		this.getPortSortieInterne(numSortie).ajouterNumComposant(-1);
