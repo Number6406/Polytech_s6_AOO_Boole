@@ -190,7 +190,8 @@ public class Composite extends $Composant implements _Composite, Cloneable{
 	
 	//================================================================= DUPLIQUER
 	
-
+	/**Fonction qui permet de dupliquer le composite courant
+	 * @return Composite identique au composite courant*/
 	public Composite duplicate()
 	{
 		int i;
@@ -210,26 +211,6 @@ public class Composite extends $Composant implements _Composite, Cloneable{
 		compo.circuit_interne = this.circuit_interne;
 		return compo;
 	}
-	
-	
-	/**
-		int i,j;
-		this.nomType = type;
-		this.listeEntrees = new ArrayList<PortEntree>();
-		this.listeSorties = new ArrayList<PortSortie>();
-		this.listeSortieInterne = new ArrayList<PortEntree>();
-		this.listeEntreInterne = new ArrayList<PortSortie>();
-		
-		for(i = 0; i < entre; i++)
-		{	
-			this.listeEntrees.add(new PortEntree(i+1));
-			this.listeEntreInterne.add(new PortSortie(i+1));
-		}
-		for(j = 0; j < sortie; j++)
-		{	
-			this.listeSorties.add(new PortSortie(j+1));
-			this.listeSortieInterne.add(new PortEntree(j+1));}
-		this.circuit_interne = new Circuit();*/
 	
 	//================================================================= REPRESENTATION TEXTUEL
 	public String toString() {

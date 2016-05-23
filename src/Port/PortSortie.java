@@ -17,16 +17,7 @@ public class PortSortie extends $Port implements Cloneable
 		this.numero = num;
 	}
 	
-	public PortSortie clone()
-	{
-		PortSortie e = new PortSortie(this.numero);	
-		e.majValeur(this.obtenirValeur());
-		if(this.estLibre()){e.liberer();}
-		else{e.reserver();}
-		e.ajouterNumComposant(this.obtenirNumComposant());
-		e.listeEntree = (ArrayList<PortEntree>) this.listeEntree.clone();
-		return e;
-	}
+	
 	
 	public PortSortie(boolean val, boolean l , ArrayList<PortEntree> liste, int num)
 	{
@@ -39,7 +30,7 @@ public class PortSortie extends $Port implements Cloneable
 	
 	/**
 	 * Ajoute une connexion avec un port d'entree
-	 * @param e le port d'entrée à connecter à ce port de sortie.
+	 * @param e le port d'entrï¿½e ï¿½ connecter ï¿½ ce port de sortie.
 	 */
 	public void add(PortEntree e)
 	{
@@ -48,11 +39,24 @@ public class PortSortie extends $Port implements Cloneable
 		this.reserver();
 	}
 	
+	/**Permet de dupliquer le port courant
+	 * @return portSortie identique au port courant*/
+	public PortSortie clone()
+	{
+		PortSortie e = new PortSortie(this.numero);	
+		e.majValeur(this.obtenirValeur());
+		if(this.estLibre()){e.liberer();}
+		else{e.reserver();}
+		e.ajouterNumComposant(this.obtenirNumComposant());
+		e.listeEntree = (ArrayList<PortEntree>) this.listeEntree.clone();
+		return e;
+	}
+	
 	/**
-	 * Permet de supprimer la connection avec un port d'entrée.
-	 * @param e le port d'entrée à deconnecter
-	 * @return le port d'entrée déconnecté.
-	 * @require PortEntree est connecté au port de sortie
+	 * Permet de supprimer la connection avec un port d'entrï¿½e.
+	 * @param e le port d'entrï¿½e ï¿½ deconnecter
+	 * @return le port d'entrï¿½e dï¿½connectï¿½.
+	 * @require PortEntree est connectï¿½ au port de sortie
 	 */
 	public PortEntree enleverUneSortie(PortEntree e)
 	{
@@ -61,16 +65,16 @@ public class PortSortie extends $Port implements Cloneable
 		int i = 0;
 		while((i<taille)&(e!=this.listeEntree.get(i)))
 		{i++;}
-		if(i==taille) throw new Require ("PortSortie : Le port à enlever n'existe pas");
+		if(i==taille) throw new Require ("PortSortie : Le port ï¿½ enlever n'existe pas");
 		p = this.listeEntree.get(i);
 		this.listeEntree.remove(i);
 		return p;
 	}
 	
 	/**
-	 * Cherche si un port d'entree est connecté 
+	 * Cherche si un port d'entree est connectï¿½ 
 	 * @param e Le port a verifier
-	 * @return true si les deux ports sont connecté, false sinon.
+	 * @return true si les deux ports sont connectï¿½, false sinon.
 	 */
 	public boolean chercher(PortEntree e)
 	{
@@ -92,7 +96,7 @@ public class PortSortie extends $Port implements Cloneable
 	
 	/**
 	 * 
-	 * @return les ports d'entrées connecté à ce port.
+	 * @return les ports d'entrï¿½es connectï¿½ ï¿½ ce port.
 	 */
 	public ArrayList<PortEntree> getEntrees()
 	{
@@ -100,7 +104,7 @@ public class PortSortie extends $Port implements Cloneable
 	}
 	
 	/**
-	 * retourne le nombre de port d'entrées connecté à ce port.
+	 * retourne le nombre de port d'entrï¿½es connectï¿½ ï¿½ ce port.
 	 * @return
 	 */
 	public int getNombreEntrees()

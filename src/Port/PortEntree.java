@@ -20,6 +20,8 @@ public class PortEntree extends $Port
 		this.numero= num;
 	}
 	
+	/**Permet de dupliquer le port courant
+	 * @return portEntre identique au port courant*/
 	public PortEntree clone()
 	{
 		PortEntree e = new PortEntree(this.numero);	

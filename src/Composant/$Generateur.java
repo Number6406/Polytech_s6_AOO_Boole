@@ -1,6 +1,7 @@
 package Composant;
 import java.util.Iterator;
 
+//TODO généricité pour éditer etat en fonction d'un boolean ou integer
 public abstract class $Generateur extends $Composant implements Iterable<Void>{
 
 	protected boolean etat;
