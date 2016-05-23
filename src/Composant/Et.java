@@ -1,5 +1,6 @@
 package Composant;
 import java.util.ArrayList;
+import java.util.List;
 
 import Port.PortEntree;
 import Port.PortSortie;

@@ -19,8 +19,10 @@ PARSER_BEGIN(Reader)
 	import Circuit.*;
 	import Composant.*;
 	import Composite.*;
+	import BaseComposite.*;
 	public class Reader {
-		public _Circuit read() throws Exception {return CIRCUIT();}
+		public _Circuit read(String s) throws Exception
+		{ return CIRCUIT();}
 		public TreeMap<String,Composite> readComposite() throws Exception { 			
 		  	return LISTECOMPOSITE();}
 	}
@@ -83,9 +85,9 @@ $Composant TYPE(String type) throws Exception:
 	}
 }
 
-/**CircuitFerme*/
+/**Fonction de création du circuit*/
 _Circuit CIRCUIT() throws Exception:
-{ /**CircuitFerme circuit*/
+{ 
 	$Composant compo;
 	Circuit circuit = new Circuit();
 	int i;
@@ -127,7 +129,8 @@ _Circuit CIRCUIT() throws Exception:
 		}		
 }
 
-$Composant COMPOSANT(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co ) throws Exception:
+/**Fonction de création du composant*/
+$Composant COMPOSANT(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co) throws Exception:
 {
   	int nb_sorties;
 	int nb_entrees;
@@ -174,6 +177,7 @@ $Composant COMPOSANT(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>
 
 
 /**"<".NUM."|".TYPE."(".NUM.",".NUM.")"."[".SORTIE_ENTRE.COMPOSANT."]".[ID]."->".SORTIE_ENTRE.">"*/
+/**Fonction de création du Composite*/
 $Composant COMPOSITE(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co) throws Exception:
 {
   	int nb_sorties;
@@ -211,8 +215,10 @@ $Composant COMPOSITE(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>
 	<P_FERME>
 	
 	//Creer Composite
-	{compo = new Composite(nb_entrees,nb_sorties,type);
-	compo.ajouterNum(indice);}
+	{
+	  	compo = new Composite(nb_entrees,nb_sorties,type);
+		compo.ajouterNum(indice);
+	}
 	
 	/**Liste des entrées*/
 	<C_OUVERT>
@@ -271,7 +277,7 @@ $Composant COMPOSITE(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>
 		return compo;
 	}
 }
-
+/**Lire les sortie d'un composant ou d'un composite, Association #port(numCompo2#port2...),...*/
 void ENTRE_SORTIE(TreeMap <Integer,TreeMap<Integer,Integer>> listeCo) throws Exception:
 {
   int numCompo2;
@@ -299,7 +305,7 @@ void ENTRE_SORTIE(TreeMap <Integer,TreeMap<Integer,Integer>> listeCo) throws Exc
 	<P_FERME>
 	{listeCo.put(port,liste);}
 }
-
+/**Lire une liste de composite*/
 TreeMap<String,Composite> LISTECOMPOSITE() throws Exception:
 {
   	String nom;

@@ -21,8 +21,8 @@ public abstract class $Composant implements _Composant {
 	}
 	
 	/**
-	 * Retourne le nombre de ports d'entrée du composant.
-	 * @return le nombre de port d'entrée
+	 * Retourne le nombre de ports d'entrï¿½e du composant.
+	 * @return le nombre de port d'entrï¿½e
 	 */
 	public int nombreEntrees(){
 		return listeEntrees.size();
@@ -37,8 +37,8 @@ public abstract class $Composant implements _Composant {
 	}
 	
 	/**
-	 * Permet de donner un numéro au composant.
-	 * @param i le numéro que doit prendre le composant.
+	 * Permet de donner un numï¿½ro au composant.
+	 * @param i le numï¿½ro que doit prendre le composant.
 	 */
 	public void ajouterNum(int i){
 		this.numero = i;
@@ -66,7 +66,7 @@ public abstract class $Composant implements _Composant {
 	
 	/**
 	 * 
-	 * @return la liste des ports d'entrée
+	 * @return la liste des ports d'entrï¿½e
 	 */
 	public List<PortEntree> getListeEntrees() {
 		return listeEntrees;
@@ -82,8 +82,8 @@ public abstract class $Composant implements _Composant {
 
 	/**
 	 * 
-	 * @param numPort le port d'entrée auquel on veut acceder
-	 * @return le port d'entrée correspondant.
+	 * @param numPort le port d'entrï¿½e auquel on veut acceder
+	 * @return le port d'entrï¿½e correspondant.
 	 */
 	public PortEntree accederPortEntre(int numPort) {
 		//Require
@@ -93,7 +93,7 @@ public abstract class $Composant implements _Composant {
 	}
 	
 	/**
-	 * Représentation textuelle d'un composant.
+	 * Reprï¿½sentation textuelle d'un composant.
 	 */
 	public String toString(){
 		String s = this.nomType+"("+this.nombreEntrees()+","+this.nombreSorties()+")->";

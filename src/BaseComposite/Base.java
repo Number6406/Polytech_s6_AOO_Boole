@@ -21,6 +21,14 @@ public class Base {
 		return composite.duplicate();
 	}
 	
+	public boolean existe(String s) throws Require
+	{
+		Composite composite = baseComposite.get(s);
+		if(composite==null){return false;}
+		return true;
+	}
+	
+	
 	
 
 }

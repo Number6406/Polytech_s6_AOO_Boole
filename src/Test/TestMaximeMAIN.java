@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.TreeMap;
 
+import BaseComposite.Base;
 import BaseComposite.Lecture;
 import Reader.Reader;
 import Circuit.Circuit;
@@ -15,6 +16,7 @@ import Composant.Et;
 import Composant.Gnd;
 import Composant.Itr;
 import Composant.Led;
+import Composant.Non;
 import Composant.Ou;
 import Composant.Vcc;
 import Composite.Composite;
@@ -122,6 +124,78 @@ public class TestMaximeMAIN {
 		{
 			System.out.println(entry.getKey()+"====> "+entry.getValue());
 		}*/
+		
+		/*CircuitTest[
+<7|Led(1,0){Eteint}>
+<6|Oux(2,1)[#1(1#1,4#1),#2(3#2,2#1)
+<5|Ou(2,1)->#1(#1)>
+<3|Et(2,1)->#1(5#1)>
+<1|Non(1,1)->#1(3#1)>
+<4|Et(2,1)->#1(5#2)>
+<2|Non(1,1)->#1(4#2)>
+]->#1(7#1)>
+<3|Ou(2,1)->#1(6#1)>
+<1|Itr(0,1){bas}->#1(3#1)>
+<4|Non(1,1)->#1(6#2)>
+<2|Itr(0,1){bas}->#1(4#1)>
+<5|Vcc(0,1)->#1(3#2)>
+]*/
+		
+		String s = cheminFichier+"/Base.txt";
+		Base b = new Base(s);
+		Itr cp1 = new Itr();
+		Itr cp2 = new Itr();
+		Et cp3 = new Et();
+		Vcc cp5 = new Vcc();
+		Non cp4 = new Non();
+		Composite cp6 = b.getComposite("Implique");
+		Led cp7 = new Led();
+		
+		Circuit c4 = new Circuit();
+		c4.ajouter(cp1, 1);
+		c4.ajouter(cp2, 2);
+		c4.ajouter(cp3, 3);
+		c4.ajouter(cp4, 4);
+		c4.ajouter(cp5, 5);
+		c4.ajouter(cp6, 6);
+		c4.ajouter(cp7, 7);
+		
+		//Branchements
+		c4.connecter(1, 1, 3, 1);
+		c4.connecter(2, 1, 4, 1);
+		c4.connecter(5, 1, 3, 2);
+		c4.connecter(3, 1, 6, 1);
+		c4.connecter(4, 1, 6, 2);
+		c4.connecter(6, 1, 7, 1);
+		System.out.println(c4);
+		
+		Itr cpo1 = new Itr();
+		Itr cpo2 = new Itr();
+		Et cpo3 = new Et();
+		Vcc cpo5 = new Vcc();
+		Ou cpo4 = new Ou();
+		Composite cpo6 = b.getComposite("Implique");
+		Led cpo7 = new Led();
+		
+		Circuit c5 = new Circuit();
+		c5.ajouter(cpo1, 1);
+		c5.ajouter(cpo2, 2);
+		c5.ajouter(cpo3, 3);
+		c5.ajouter(cpo4, 4);
+		c5.ajouter(cpo5, 5);
+		c5.ajouter(cpo6, 6);
+		c5.ajouter(cpo7, 7);
+		
+		//Branchements
+		c5.connecter(1, 1, 3, 1);
+		c5.connecter(2, 1, 4, 1);
+		c5.connecter(1, 1, 4, 2);
+		c5.connecter(5, 1, 3, 2);
+		c5.connecter(3, 1, 6, 1);
+		c5.connecter(4, 1, 6, 2);
+		c5.connecter(6, 1, 7, 1);
+		System.out.println(c5);
+		System.out.println(c4);
 		
 	}
 

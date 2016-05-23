@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import jus.util.assertion.Require;
 
 /**@invariant : ????*/
-public class PortSortie extends $Port 
+public class PortSortie extends $Port implements Cloneable 
 {
 	private ArrayList<PortEntree> listeEntree;
 	
@@ -15,6 +15,17 @@ public class PortSortie extends $Port
 		this.liberer();
 		this.listeEntree = new ArrayList<PortEntree>();
 		this.numero = num;
+	}
+	
+	public PortSortie clone()
+	{
+		PortSortie e = new PortSortie(this.numero);	
+		e.majValeur(this.obtenirValeur());
+		if(this.estLibre()){e.liberer();}
+		else{e.reserver();}
+		e.ajouterNumComposant(this.obtenirNumComposant());
+		e.listeEntree = (ArrayList<PortEntree>) this.listeEntree.clone();
+		return e;
 	}
 	
 	public PortSortie(boolean val, boolean l , ArrayList<PortEntree> liste, int num)

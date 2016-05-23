@@ -9,7 +9,7 @@ import Port.PortSortie;
 import jus.util.assertion.*;
 
 
-public class Circuit implements _Circuit {
+public class Circuit implements _Circuit{
 
 	Map<Integer,$Composant> listeOperateur;
 	
@@ -20,11 +20,10 @@ public class Circuit implements _Circuit {
 	{
 		listeOperateur = new HashMap<Integer,$Composant>();
 	}
-
 	
 	/** Fonction permettant d'ajouter un composant dans un circuit.
-	 * @param nouveauComposant Composant à ajouter au circuit
-	 * @param numeroComposant Numeros du composant à ajouter dans le circuit.
+	 * @param nouveauComposant Composant ï¿½ ajouter au circuit
+	 * @param numeroComposant Numeros du composant ï¿½ ajouter dans le circuit.
 	 * @require getComposant(numeroComposant)==null && nouveauComposant!=null && numeroComposant>=1
 	 */
 	public void ajouter($Composant nouveauComposant, int numeroComposant) {
@@ -42,16 +41,16 @@ public class Circuit implements _Circuit {
 	}
 
 	/**
-	 * Fonction permettant de connecter deux composant dans un circuit via leurs numéros de port.
+	 * Fonction permettant de connecter deux composant dans un circuit via leurs numï¿½ros de port.
 	 * @require ComposantsExistent : numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie < listeOperateur.size() && numComposantEntree < listeOperateur.size()
 	 * @require PortEntreeExiste : numPortEntree >= 0 && numPortEntree < composantEntree.listeEntrees.size()
 	 * @require PortEntreeLibre : portEntree.estLibre()
 	 * @require PortSortieExiste : numPortSortie >= 0 && numPortSortie < composantSortie.listeSorties.size()
 	 * @require ConnexionExistePas : portSortie.getEntrees().contains(portEntree)
-	 * @param numComposantSortie Numéro du composant dont on veut la sortie
-	 * @param numPortSortie Port de sortie de numComposantSortie à connecter
-	 * @param numComposantEntree Numéro du composant en entrée
-	 * @param numPortEntree Port d'entrée de numComposantEntree à connecter
+	 * @param numComposantSortie Numï¿½ro du composant dont on veut la sortie
+	 * @param numPortSortie Port de sortie de numComposantSortie ï¿½ connecter
+	 * @param numComposantEntree Numï¿½ro du composant en entrï¿½e
+	 * @param numPortEntree Port d'entrï¿½e de numComposantEntree ï¿½ connecter
 	 */
 	public void connecter(int numComposantSortie, int numPortSortie, int numComposantEntree, int numPortEntree){
 		
@@ -84,7 +83,7 @@ public class Circuit implements _Circuit {
 	
 	/**
 	 * Fonction permettant de savoir si un circuit est evaluable
-	 * @return true : le circuit est évaluable, false : le circuit n'est pas évaluable.
+	 * @return true : le circuit est ï¿½valuable, false : le circuit n'est pas ï¿½valuable.
 	 */
 	public boolean evaluable()
 	{
@@ -108,7 +107,7 @@ public class Circuit implements _Circuit {
 	}
 	
 	/**
-	 * Fonction permettant de récuperer un composant à partir de son numéro dans un circuit.
+	 * Fonction permettant de rï¿½cuperer un composant ï¿½ partir de son numï¿½ro dans un circuit.
 	 * @return le composant numero i, null si aucun composant porte se numero.
 	 */
 	public $Composant getComposant(int i)

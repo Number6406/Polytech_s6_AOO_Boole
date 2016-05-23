@@ -1,5 +1,5 @@
 package Port;
-public abstract class $Port implements _Port {
+public abstract class $Port implements _Port,Cloneable {
 	
 	private boolean valeur;
 	private boolean libre;

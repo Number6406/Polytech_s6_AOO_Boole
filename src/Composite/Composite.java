@@ -10,12 +10,13 @@ import Port.PortEntree;
 import Port.PortSortie;
 import jus.util.assertion.Require;
 
-public class Composite extends $Composant implements _Composite{
+public class Composite extends $Composant implements _Composite, Cloneable{
 	
 	private Circuit circuit_interne;
 	protected List<PortEntree> listeSortieInterne;
 	protected List<PortSortie> listeEntreInterne;
-	private boolean valeur; 
+	private boolean valeur;
+	private String type; 
 	
 	public Composite(int entre, int sortie , String type)
 	{
@@ -37,8 +38,8 @@ public class Composite extends $Composant implements _Composite{
 			this.listeSortieInterne.add(new PortEntree(j+1));}
 		this.circuit_interne = new Circuit();
 	}
-	
-	//ACCEDER AU PORTS ENTRE ET SORTIE INTERNE
+		
+	//================================================================ ACCEDER AU PORTS ENTRE ET SORTIE INTERNE, GETTER/SETTER
 	/**@Require : i < nombre sortie*/
 	public PortEntree getPortSortieInterne(int i) throws Require
 	{
@@ -54,10 +55,24 @@ public class Composite extends $Composant implements _Composite{
 		return this.listeEntreInterne.get(i-1);
 	}
 	
+	
+	
+	/**Obtenir un composant selon son indice*/
+	/**@Require : Composant-1<NbComposant*/
+	public $Composant getComposant(int numComposant)throws Require
+	{	if(this.circuit_interne.nombreComposant()<=numComposant){throw new Require("Existe");}
+		return this.circuit_interne.getComposant(numComposant);}
+
+	/**Obtenir un composant selon son indice*/
+	public int nbComposant()
+	{return this.circuit_interne.nombreComposant();}
+	
+	//================================================================= AJOUTER 
 	/**Ajouter un composant au circuit interne*/
 	public void ajouter($Composant nouveauComposant, int numeroComposant) 
 	{this.circuit_interne.ajouter(nouveauComposant, numeroComposant);}
 
+	//================================================================= CONNEXION
 	/**Connecter deux composants*/
 	public void connecter(int numComposantSortie, int numPortSortie, int numComposantEntree, int numPortEntree)
 	{this.circuit_interne.connecter(numComposantSortie, numPortSortie, numComposantEntree, numPortEntree);}
@@ -75,6 +90,7 @@ public class Composite extends $Composant implements _Composite{
 		this.getPortSortieInterne(numSortie).ajouterNumComposant(-1);		
 	}
 	
+	//================================================================= CALCUL
 	/**Transmettre les valeurs d'entrée vers les ports d'entre interne*/
 	private void transmettreValeurEntrees()
 	{
@@ -108,16 +124,6 @@ public class Composite extends $Composant implements _Composite{
 			
 		}
 	}
-	
-	/**Obtenir un composant selon son indice*/
-	public $Composant getComposant(int numComposant)
-	{return this.circuit_interne.getComposant(numComposant);}
-
-	/**Obtenir un composant selon son indice*/
-	public int nbComposant()
-	{return this.circuit_interne.nombreComposant();}
-	
-	//public boolean evaluable(){return true;}
 
 	@Override
 	public void calculer() 
@@ -182,15 +188,50 @@ public class Composite extends $Composant implements _Composite{
 		return true;
 	}
 	
+	//================================================================= DUPLIQUER
+	
+
 	public Composite duplicate()
 	{
-		try 
-		{
-			return ((Composite) this.clone());
-		} catch (CloneNotSupportedException e) {e.printStackTrace();}
-		return null;
+		int i;
+		Composite compo = new Composite(this.nombreEntrees(), this.nombreSorties(), this.obtenirType());
+		compo.type = this.nomType;
+		
+		for(i = 0; i < this.nombreEntrees(); i++)
+		{	
+			compo.listeEntrees.add(this.accederPortEntre(i+1).clone());
+			compo.listeEntreInterne.add(this.getPortEntreInterne(i+1).clone());
+		}
+		for(i = 0; i < this.nombreSorties(); i++)
+		{	
+			compo.listeSorties.add(this.accederPortSortie(i+1).clone());
+			compo.listeSortieInterne.add(this.getPortSortieInterne(i+1).clone());}
+		
+		compo.circuit_interne = this.circuit_interne;
+		return compo;
 	}
 	
+	
+	/**
+		int i,j;
+		this.nomType = type;
+		this.listeEntrees = new ArrayList<PortEntree>();
+		this.listeSorties = new ArrayList<PortSortie>();
+		this.listeSortieInterne = new ArrayList<PortEntree>();
+		this.listeEntreInterne = new ArrayList<PortSortie>();
+		
+		for(i = 0; i < entre; i++)
+		{	
+			this.listeEntrees.add(new PortEntree(i+1));
+			this.listeEntreInterne.add(new PortSortie(i+1));
+		}
+		for(j = 0; j < sortie; j++)
+		{	
+			this.listeSorties.add(new PortSortie(j+1));
+			this.listeSortieInterne.add(new PortEntree(j+1));}
+		this.circuit_interne = new Circuit();*/
+	
+	//================================================================= REPRESENTATION TEXTUEL
 	public String toString() {
 		int i,j;
 		String listeCompo,listeEntre, composite,listeSortie;

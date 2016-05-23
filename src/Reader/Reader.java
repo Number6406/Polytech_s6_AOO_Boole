@@ -5,8 +5,10 @@
         import Circuit.*;
         import Composant.*;
         import Composite.*;
+        import BaseComposite.*;
         public class Reader implements ReaderConstants {
-                public _Circuit read() throws Exception {return CIRCUIT();}
+                public _Circuit read(String s) throws Exception
+                { return CIRCUIT();}
                 public TreeMap<String,Composite> readComposite() throws Exception {
                         return LISTECOMPOSITE();}
 
@@ -41,9 +43,8 @@
     throw new Error("Missing return statement in function");
   }
 
-/**CircuitFerme*/
+/**Fonction de création du circuit*/
   final public _Circuit CIRCUIT() throws ParseException, Exception {
-  /**CircuitFerme circuit*/
         $Composant compo;
         Circuit circuit = new Circuit();
         int i;
@@ -98,6 +99,7 @@
     throw new Error("Missing return statement in function");
   }
 
+/**Fonction de création du composant*/
   final public $Composant COMPOSANT(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co) throws ParseException, Exception {
         int nb_sorties;
         int nb_entrees;
@@ -155,6 +157,7 @@
   }
 
 /**"<".NUM."|".TYPE."(".NUM.",".NUM.")"."[".SORTIE_ENTRE.COMPOSANT."]".[ID]."->".SORTIE_ENTRE.">"*/
+/**Fonction de création du Composite*/
   final public $Composant COMPOSITE(TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co) throws ParseException, Exception {
         int nb_sorties;
         int nb_entrees;
@@ -180,8 +183,8 @@
     jj_consume_token(SEPARATEUR);
     nb_sorties = Nombre();
     jj_consume_token(P_FERME);
-         compo = new Composite(nb_entrees,nb_sorties,type);
-        compo.ajouterNum(indice);
+                compo = new Composite(nb_entrees,nb_sorties,type);
+                compo.ajouterNum(indice);
     jj_consume_token(C_OUVERT);
     label_3:
     while (true) {
@@ -310,6 +313,7 @@
     throw new Error("Missing return statement in function");
   }
 
+/**Lire les sortie d'un composant ou d'un composite, Association #port(numCompo2#port2...),...*/
   final public void ENTRE_SORTIE(TreeMap <Integer,TreeMap<Integer,Integer>> listeCo) throws ParseException, Exception {
   int numCompo2;
   int port2;
@@ -377,6 +381,7 @@
          listeCo.put(port,liste);
   }
 
+/**Lire une liste de composite*/
   final public TreeMap<String,Composite> LISTECOMPOSITE() throws ParseException, Exception {
         String nom;
         TreeMap<String,Composite> listeComposant = new TreeMap<String,Composite>();
@@ -413,18 +418,13 @@
     finally { jj_save(1, xla); }
   }
 
-  private boolean jj_3R_16() {
-    if (jj_3R_17()) return true;
-    return false;
-  }
-
   private boolean jj_3R_17() {
     if (jj_scan_token(HASHTAG)) return true;
     return false;
   }
 
-  private boolean jj_3R_12() {
-    if (jj_scan_token(NUM)) return true;
+  private boolean jj_3R_16() {
+    if (jj_3R_17()) return true;
     return false;
   }
 
@@ -449,6 +449,11 @@
       if (jj_3R_16()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(P_FERME)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_12() {
+    if (jj_scan_token(NUM)) return true;
     return false;
   }
 
