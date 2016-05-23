@@ -12,7 +12,9 @@ import jus.util.assertion.Require;
  * @invariant BienConstruit : (listeEntrees.size() == 0) && (listeSorties.size() == 1)
  */
 public class Gnd extends $Generateur{
-	
+	/**
+	 * Constructeur d'un générateur de niveau bas.
+	 */
 	public Gnd(){
 		this.nomType = "GND";
 		this.etat = false;
@@ -24,7 +26,10 @@ public class Gnd extends $Generateur{
 		_invariant();
 	}
 	
-	/* Propagation de la valeur */
+	/**
+	 * Permet de propager la valeur du Gnd aux ports connecté à celui-ci
+	 * @require (listeSorties.size() > 0)
+	 */
 	public void calculer() throws Require{
 		if(!(listeSorties.size() > 0)){
 			throw new Require("Gnd : Port de Sortie non existant");

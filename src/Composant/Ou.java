@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import Port.PortEntree;
 import Port.PortSortie;
+import jus.util.assertion.Ensure;
 import jus.util.assertion.Invariant;
 import jus.util.assertion.Require;
 
@@ -50,12 +51,12 @@ public class Ou extends $Transformateur {
 			portEntree.majValeur(res);
 		});
 	
-//		// ENSURE
-//		ensure = true;
-//		for (PortEntree portEntree : destinations) {
-//			ensure = ensure && !(portEntree.estLibre());
-//		}
-//		if(!(ensure)){ throw new Ensure("EntreesRemplies");}
+		// ENSURE
+		boolean ensure = true;
+		for (PortEntree portEntree : listeSorties.get(0).getEntrees()) {
+			ensure = ensure && !(portEntree.estLibre());
+		}
+		if(!(ensure)){ throw new Ensure("EntreesRemplies");}
 		
 		_invariant();
 	}

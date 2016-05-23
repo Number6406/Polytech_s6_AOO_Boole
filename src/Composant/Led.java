@@ -11,6 +11,10 @@ import jus.util.assertion.Require;
  */
 public class Led extends $Recepteur{
 	
+	/**
+	 * Constructeur d'un recepteur Led
+	 * Eteinte par défaut.
+	 */
 	public Led(){
 		this.nomType = "LED";
 		this.etat = false; //etein
@@ -22,6 +26,10 @@ public class Led extends $Recepteur{
 		_invariant();
 	}
 	
+	/**
+	 * Permet de modifier l'état de la led selon ses entrées
+	 * @require !listeEntrees.get(0).estLibre()
+	 */
 	public void calculer() throws Require{
 		if((listeEntrees.get(0).estLibre())){
 			throw new Require("Non : PortsEntree non Connectes");

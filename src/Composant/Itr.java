@@ -14,6 +14,9 @@ import jus.util.assertion.Require;
  */
 public class Itr extends $Generateur{
 	
+	/**
+	 * Contructeur d'un interupteur. Niveau bas par défaut
+	 */
 	public Itr(){
 		this.nomType = "ITR";
 		this.etat = false; // Bas par dÃ©faut
@@ -25,16 +28,24 @@ public class Itr extends $Generateur{
 		_invariant();
 	}
 	
-	/* MÃ©thodes de modifications de l'Ã©tat de l'interrupteur */
+	/**
+	 * Methode permetant de modifier l'état de l'interupteur à bas
+	 */
 	public void ItrBas(){
 		this.etat = false;
 	}
 	
+	/**
+	 * Methode permetant de modifier l'état de l'interupteur à haut
+	 */
 	public void ItrHaut(){
 		this.etat = true;
 	}
 	
-	/* Propagation de la valeur */
+	/**
+	 * Permet de propager la valeur de l'interupteur aux ports connecté à celui-ci
+	 * @require (listeSorties.size() > 0)
+	 */
 	public void calculer() throws Require{
 		if(!(listeSorties.size() > 0)){
 			throw new Require("Non : Port de Sortie non existant");
