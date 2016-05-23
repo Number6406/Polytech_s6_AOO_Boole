@@ -94,10 +94,10 @@ public class TestMaximeMAIN {
 		System.out.println(cF2.evaluer());
 		Led ledR = (Led) cF2.getComposant(8);
 		
-		System.out.println("La LED est : "+ ledR.etat);
+		System.out.println("La LED est : "+ ledR.etatRecepteur());
 		compo6.ItrHaut();
 		System.out.println(cF2.evaluer());
-		System.out.println("La LED est : "+ ledR.etat);
+		System.out.println("La LED est : "+ ledR.etatRecepteur());
 		
 		File fichierCircuit = new File(cheminFichier+"/circuit1.txt");
 		try 
