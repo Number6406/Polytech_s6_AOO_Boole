@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-
-import jus.util.assertion.Invariant;
 import jus.util.assertion.Require;
 
 /**
@@ -19,12 +17,24 @@ public class CircuitTestUnitaire {
 		
 		System.out.println(c1.toString());
 		
-		TableauTest T = new TableauTest(2, 1);
-		CoupleES c = new CoupleES(2,1);
-		T.ajouterLigne(c);
-		System.out.println(T.toString());
-		
-		
+		tester(c1);
+	}
+	
+	
+	private static CoupleES creerCouple(List<$Generateur> G, List<$Recepteur> R, int nbG, int nbR){
+		CoupleES c;
+		c = new CoupleES(nbG, nbR);
+		int i = 0;
+		for($Generateur gen : G){
+			c.modifierEntree(i, gen.etatGenerateur());
+			i++;
+		}
+		i=0;
+		for($Recepteur rec : R){
+			c.modifierSortie(i, rec.etatRecepteur());
+			i++;
+		}
+		return c;
 	}
 	
 	/**
@@ -33,6 +43,7 @@ public class CircuitTestUnitaire {
 	 * @require CircuitFerme : c.evaluable()
 	 */
 	public static void tester(Circuit c) throws Require{
+		
 		
 		if(!(c.evaluable())){
 			throw new Require("tester : CircuitFerme");
@@ -45,7 +56,7 @@ public class CircuitTestUnitaire {
 		ArrayList<$Generateur> listeGenerateur = new ArrayList<$Generateur>(); 
 		ArrayList<$Recepteur> listeRecepteur = new ArrayList<$Recepteur>(); 
 		
-		for (int i = 0; i < nbComposants; i++) {
+		for (int i = 1; i <= nbComposants; i++) {
 			if(cf.getComposant(i) instanceof $Generateur){
 				nbGenerateurs++;
 				listeGenerateur.add(($Generateur)cf.getComposant(i));
@@ -56,8 +67,18 @@ public class CircuitTestUnitaire {
 			}
 		}
 		
-		TableauTest Tab = new TableauTest(nbGenerateurs, nbRecepteurs);
+		// Tableau pour entrer toutes les entrées possibles avec leur sorties correspondantes.
+		Extension Tab = new Extension(nbGenerateurs, nbRecepteurs);
 		
+		cf.evaluer();
+		Tab.ajouterLigne(creerCouple(listeGenerateur,listeRecepteur,nbGenerateurs, nbRecepteurs));
+		
+		for($Generateur G : listeGenerateur){
+				cf.evaluer();
+				Tab.ajouterLigne(creerCouple(listeGenerateur,listeRecepteur,nbGenerateurs, nbRecepteurs));
+		}
+		
+		System.out.println(Tab.toString());
 		
 	}
 	

@@ -3,12 +3,12 @@ import java.util.List;
 
 import jus.util.assertion.Require;
 
-public class TableauTest{
+public class Extension{
 		private List<CoupleES> Tab;
 		private int nbE;
 		private int nbS;
 		
-		public TableauTest(int nbe,int nbs){
+		public Extension(int nbe,int nbs){
 			Tab = new ArrayList<CoupleES>();
 			nbE = nbe;
 			nbS = nbs;
