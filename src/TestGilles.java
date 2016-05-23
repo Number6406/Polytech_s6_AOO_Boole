@@ -34,7 +34,13 @@ public class TestGilles {
 		
 		System.out.println("L1 : " + l1.etatRecepteur() + " L2 : " + l2.etatRecepteur());
 		
+		i1.ItrHaut();
+		testF.evaluer();
+		System.out.println("L1 : " + l1.etatRecepteur() + " L2 : " + l2.etatRecepteur());
 		
+		i2.ItrHaut();
+		testF.evaluer();
+		System.out.println("L1 : " + l1.etatRecepteur() + " L2 : " + l2.etatRecepteur());
 		
 	}
 	

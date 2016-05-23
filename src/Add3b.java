@@ -41,7 +41,7 @@ public class Add3b extends Composite {
 		this.connecter(5, 1, 7, 2);
 		
 		//sortie composant 2 vers ps1
-		this.connecterSortie(1, 2, 1);
+		this.connecterSortie(2, 1, 1);
 		
 		//sortie composant 7 vers ps2
 		this.connecterSortie(7, 1, 2);

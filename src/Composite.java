@@ -80,17 +80,23 @@ public class Composite extends $Composant implements _Composite{
 	public void connecterSortie(int numComposantSortie, int portSortieCompo, int numSortie)
 	{
 		circuit_interne.getComposant(numComposantSortie).accederPortSortie(portSortieCompo).add(this.getPortSortieInterne(numSortie));
-		this.getPortSortieInterne(numSortie).ajouterNumComposant(-1);
-		
+		this.getPortSortieInterne(numSortie).ajouterNumComposant(-1);		
 	}
 	
 	/**Transmettre les valeurs d'entrée vers les ports d'entre interne*/
 	private void transmettreValeurEntrees()
 	{
 		int i;
-		for(i=0;i < this.nombreEntrees();i++)
+		boolean val;
+		for(i=1;i <= this.nombreEntrees();i++)
 		{
-			this.accederPortEntre(i).majValeur(this.getPortEntreInterne(i).obtenirValeur());
+			val = this.accederPortEntre(i).obtenirValeur();
+			this.getPortEntreInterne(i).majValeur(val);
+			for(PortEntree p : this.getPortEntreInterne(i).getEntrees())
+			{
+				p.majValeur(val);
+			}
+			
 		}
 	}
 	
@@ -98,9 +104,16 @@ public class Composite extends $Composant implements _Composite{
 	private void transmettreValeurSortie()
 	{
 		int i;
-		for(i=0;i < this.nombreSorties();i++)
+		boolean val;
+		for(i=1;i <= this.nombreSorties();i++)
 		{
-			this.accederPortSortie(i).majValeur(this.getPortSortieInterne(i).obtenirValeur());
+			val = this.getPortSortieInterne(i).obtenirValeur();
+			this.accederPortSortie(i).majValeur(val);
+			for(PortEntree p : this.accederPortSortie(i).getEntrees())
+			{
+				p.majValeur(val);
+			}
+			
 		}
 	}
 	
@@ -127,12 +140,12 @@ public class Composite extends $Composant implements _Composite{
 			nbEntree[i] = -1;
 		}
 		
-		for(i = 0; i <this.circuit_interne.nombreComposant(); i++)
+		for(i = 1; i <=this.circuit_interne.nombreComposant(); i++)
 		{
 			nbEntree[i] = this.circuit_interne.getComposant(i).nombreEntrees();
 		}
 		
-		for(i = 0; i <this.nombreEntrees(); i++)
+		for(i = 1; i <=this.nombreEntrees(); i++)
 		{
 			for(indice = 0; indice <this.getPortEntreInterne(i).getNombreEntrees(); indice++)
 			{
@@ -154,7 +167,8 @@ public class Composite extends $Composant implements _Composite{
 						for(PortEntree pE : pS.getEntrees())
 						{
 							numCompo = pE.obtenirNumComposant();
-							nbEntree[numCompo] =  nbEntree[numCompo] -1;
+							if(numCompo!=-1)
+								nbEntree[numCompo] =  nbEntree[numCompo] -1;
 						}
 					}
 					
