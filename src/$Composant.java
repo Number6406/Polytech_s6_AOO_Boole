@@ -52,9 +52,9 @@ public abstract class $Composant implements _Composant {
 		String s = this.nomType+"("+this.nombreEntrees()+","+this.nombreSorties()+")->";
 		int j;
 		for (j = 0; j < listeSorties.size()-1; j++) {
-			s = s+"#"+j+listeSorties.get(j).toString()+",";
+			s = s+"#"+(j+1)+listeSorties.get(j).toString()+",";
 		}
-		s = s+"#"+j+listeSorties.get(j).toString();
+		s = s+"#"+(j+1)+listeSorties.get(j).toString();
 		return s;
 	}
 	
