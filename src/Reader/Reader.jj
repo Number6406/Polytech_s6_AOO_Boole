@@ -21,9 +21,8 @@ PARSER_BEGIN(Reader)
 	import Composite.*;
 	public class Reader {
 		public _Circuit read() throws Exception {return CIRCUIT();}
-		public Composite readComposite() throws Exception {
-			TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co = new TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>(); 			
-		  	return ((Composite) COMPOSITE(co));}
+		public TreeMap<String,Composite> readComposite() throws Exception { 			
+		  	return LISTECOMPOSITE();}
 	}
 PARSER_END(Reader)
 
@@ -299,4 +298,18 @@ void ENTRE_SORTIE(TreeMap <Integer,TreeMap<Integer,Integer>> listeCo) throws Exc
 	)
 	<P_FERME>
 	{listeCo.put(port,liste);}
+}
+
+TreeMap<String,Composite> LISTECOMPOSITE() throws Exception:
+{
+  	String nom;
+	TreeMap<String,Composite> listeComposant = new TreeMap<String,Composite>(); 
+	$Composant compo;
+	TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>> co = new TreeMap <Integer,TreeMap<Integer,TreeMap<Integer,Integer>>>(); 
+
+}
+{
+	(compo = COMPOSITE(co)
+	{listeComposant.put(compo.obtenirType(),((Composite) compo));})*
+	{return listeComposant;}
 }
