@@ -13,18 +13,26 @@ public class Circuit implements _Circuit {
 
 	Map<Integer,$Composant> listeOperateur;
 	
+	/**
+	 * Constructeur de la classe circuit.
+	 */
 	public Circuit()
 	{
-		listeOperateur = new HashMap<Integer,$Composant>(); //#TODO a verifier le type, mais il faut l'initialiser qqpart...
+		listeOperateur = new HashMap<Integer,$Composant>();
 	}
 
 	
 	/**
 	 * #TODO Javadoc + test si numero composant deja pris
-	 * @param nouveauComposant
-	 * @param numeroComposant
+	 * @param nouveauComposant Composant à ajouter au circuit
+	 * @param numeroComposant Numeros du composant à ajouter dans le circuit.
+	 * @require getComposant(numeroComposant)!=null && nouveauComposant!=null && numeroComposant>=1
 	 */
 	public void ajouter($Composant nouveauComposant, int numeroComposant) {
+		if(getComposant(numeroComposant)==null) throw new Require("Circuit : Numero composant deja pris");
+		if(nouveauComposant==null) throw new Require("Circuit : Composant null");
+		if(numeroComposant<1) throw new Require("Circuit : numero composant invalide");
+		
 		nouveauComposant.getListeEntrees().forEach((port) -> {
 			port.ajouterNumComposant(numeroComposant);
 		});
@@ -40,22 +48,15 @@ public class Circuit implements _Circuit {
 	 * @require PortEntreeLibre : portEntree.estLibre()
 	 * @require PortSortieExiste : numPortSortie >= 0 && numPortSortie < composantSortie.listeSorties.size()
 	 * @require ConnexionExistePas : portSortie.getEntrees().contains(portEntree)
-	 * @param numComposantSortie
-	 * @param numPortSortie
-	 * @param numComposantEntree
-	 * @param numPortEntree
+	 * @param numComposantSortie Numéro du composant dont on veut la sortie
+	 * @param numPortSortie Port de sortie de numComposantSortie à connecter
+	 * @param numComposantEntree Numéro du composant en entrée
+	 * @param numPortEntree Port d'entrée de numComposantEntree à connecter
 	 */
 	public void connecter(int numComposantSortie, int numPortSortie, int numComposantEntree, int numPortEntree){
 		
-		//Cette assertion ne fonctionne pas, si on veut avoir les numeros qu'on veut.
-		//Cette assertion ne fonctionne pas, si on veut avoir des numeros de composants qui commencent a 1
-//		if(!(numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie < listeOperateur.size() && numComposantEntree < listeOperateur.size())) {
-//			throw new Require("ComposantsExistent");
-//		}
-		
 		numPortEntree-=1;
 		numPortSortie-=1;
-		
 		
 		//celle ci prend en compte si les composant commence a 1 et se suivent (mais ne verifie pas qu'ils se suivent)
 		if(!(numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie <= listeOperateur.size() && numComposantEntree <= listeOperateur.size())) {
@@ -81,6 +82,10 @@ public class Circuit implements _Circuit {
 		
 	}
 	
+	/**
+	 * Fonction permettant de savoir si un circuit est evaluable
+	 * @return true : le circuit est évaluable, false : le circuit n'est pas évaluable.
+	 */
 	public boolean evaluable()
 	{
 		for (Map.Entry<Integer, $Composant> entry : listeOperateur.entrySet()) {
@@ -102,6 +107,10 @@ public class Circuit implements _Circuit {
 		return true;
 	}
 	
+	/**
+	 * Fonction permettant de récuperer un composant à partir de son numéro dans un circuit.
+	 * @return le composant numero i, null si aucun composant porte se numero.
+	 */
 	public $Composant getComposant(int i)
 	{
 		for(Map.Entry<Integer, $Composant> entry : this.listeOperateur.entrySet())
@@ -111,9 +120,14 @@ public class Circuit implements _Circuit {
 		return null;
 	}
 	
+	/**
+	 * Fonction permettant de savoir combien de composants composent le circuit
+	 * @return le nombre de composant dans le circuit.
+	 */
 	public int nombreComposant()
 	{return this.listeOperateur.size();}
 
+	
 	public String toString() 
 	{
 		String listeCompo, debutCiruit;

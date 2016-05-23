@@ -1,20 +1,30 @@
 package Circuit;
+import Composant.$Composant;
 import Port.PortEntree;
 import Port.PortSortie;
+import jus.util.assertion.Invariant;
 import jus.util.assertion.Require;
 
 public class CircuitFerme extends Circuit {
 	
-	
+	/**
+	 * Constructeur de la classe CircuitFerme.
+	 * @param Un circuit
+	 * @require c.evaluable()
+	 */
 	public CircuitFerme (Circuit c)
 	{
 		if(c.evaluable()) this.listeOperateur = c.listeOperateur;
 		else throw new Require("CircuitFerme : Require Constructeur");
 	}
+	
+	
+	/**
+	 * Fonction permettant d'evaluer un circuit
+	 * @return true, si l'evaluation a fonctionné.
+	 */
 	public boolean evaluer() {
-		//#TODO Attention a l'ordre des composants !!!
 		//#TODO chercher les cas d'erreurs !
-		//Normalement si on est ici c'est que le circuit est evaluable
 		
 		//On creer deux tableaux pour avoir les nb entree de chaque composant
 		int nbEntree[] = new int[listeOperateur.size()+1]; 
@@ -59,6 +69,11 @@ public class CircuitFerme extends Circuit {
 		return true;
 	}
 	
+	/**
+	 * Fonction permettant de savoir si on a calcule tous les composants
+	 * @param entree le tableau contenant le nombre d'entrée restante a calculer par composant
+	 * @return true, si tout a été calculé. false sinon.
+	 */
 	private boolean toutCalcule(int[] entree)
 	{
 		for(int valeur : entree)
@@ -71,6 +86,34 @@ public class CircuitFerme extends Circuit {
 	
 	//#TODO Invariant : modification -> toujours evaluable
 	
+	@Override
+	public void ajouter($Composant nouveauComposant, int numeroComposant) {
+		super.ajouter(nouveauComposant, numeroComposant);
+		if(_invariant()) throw new Invariant("CircuitFerme");
+		
+	}
+	
+	/**
+	 * @require ComposantsExistent : numComposantSortie >= 0 && numComposantEntree >= 0 && numComposantSortie < listeOperateur.size() && numComposantEntree < listeOperateur.size()
+	 * @require PortEntreeExiste : numPortEntree >= 0 && numPortEntree < composantEntree.listeEntrees.size()
+	 * @require PortEntreeLibre : portEntree.estLibre()
+	 * @require PortSortieExiste : numPortSortie >= 0 && numPortSortie < composantSortie.listeSorties.size()
+	 * @require ConnexionExistePas : portSortie.getEntrees().contains(portEntree)
+	 * @param numComposantSortie Numéro du composant dont on veut la sortie
+	 * @param numPortSortie Port de sortie de numComposantSortie à connecter
+	 * @param numComposantEntree Numéro du composant en entrée
+	 * @param numPortEntree Port d'entrée de numComposantEntree à connecter
+	 */
+	@Override
+	public void connecter(int numComposantSortie, int numPortSortie, int numComposantEntree, int numPortEntree){
+		super.connecter(numComposantSortie, numPortSortie, numComposantEntree, numPortEntree);
+		if(_invariant()) throw new Invariant("CircuitFerme");
+	}
+
+	private boolean _invariant() {
+		return this.evaluable();
+		
+	}
 	
 
 }
