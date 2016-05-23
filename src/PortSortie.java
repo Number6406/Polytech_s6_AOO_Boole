@@ -70,7 +70,8 @@ public class PortSortie extends $Port
 	
 	// Affiche la liste des composants auxquels le port de sortie est connecté
 	//TODO ajouter le numéro de port d'entrée à un port pour la représentation textuelle
-	public String toString(){
+	public String toString()
+	{
 		String s = "(";
 		int i;
 		for (i=0;i<listeEntree.size();i++) 
