@@ -77,7 +77,7 @@ public class Composite extends $Composant implements _Composite{
 	}
 	
 	/**Connecter un composant à une sortie*/
-	public void connecterSortie(int numComposantSortie, int numSortie, int portSortieCompo)
+	public void connecterSortie(int numComposantSortie, int portSortieCompo, int numSortie)
 	{
 		circuit_interne.getComposant(numComposantSortie).accederPortSortie(portSortieCompo).add(this.getPortSortieInterne(numSortie));
 		this.getPortSortieInterne(numSortie).ajouterNumComposant(-1);
