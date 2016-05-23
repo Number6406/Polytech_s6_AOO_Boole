@@ -8,8 +8,12 @@ public class TestGilles {
 
 	public static void main(String[] args) {
 		
-		testAdd1b();
-	
+		//testAdd1b();
+		String tests = Integer.toBinaryString(-8);
+		System.out.println(tests);
+		char[] test = tests.toCharArray();
+		int lg = test.length;
+		System.out.println(test[lg-1] + "" + test[lg-2] + test[lg-3] + test[lg-4]);
 	}
 	
 	public static void testAdd3b() {
