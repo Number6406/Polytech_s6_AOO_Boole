@@ -70,13 +70,13 @@ public class Composite extends $Composant implements _Composite{
 	{this.circuit_interne.connecter(numComposantSortie, numPortSortie, numComposantEntree, numPortEntree);}
 	
 	/**Connecter une entre à un composant*/
-	public void connecterEntre(int numComposantEntre, int numEntre, int portEntreCompo)
+	public void connecterEntre(int numEntre, int numComposantEntre, int portEntreCompo)
 	{ 
 		this.getPortEntreInterne(numEntre).add(circuit_interne.getComposant(numComposantEntre).accederPortEntre(portEntreCompo));
 	}
 	
 	/**Connecter un composant à une sortie*/
-	public void connecterSortie(int numComposantSortie, int numSortie, int portSortieCompo)
+	public void connecterSortie(int numComposantSortie, int portSortieCompo, int numSortie)
 	{
 		circuit_interne.getComposant(numComposantSortie).accederPortSortie(portSortieCompo).add(this.getPortSortieInterne(numSortie));
 		this.getPortSortieInterne(numSortie).ajouterNumComposant(-1);
