@@ -5,6 +5,9 @@ import Composant.Oux;
 
 public class Add3b extends Composite {
 
+	/**
+	 * Creer un additioneur trois bits
+	 */
 	public Add3b() {
 		super(3,2,"Add3b");
 		
