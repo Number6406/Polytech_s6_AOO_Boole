@@ -2,7 +2,6 @@ package Test;
 
 import Circuit.*;
 import Composant.*;
-import Composite.*;
 import Test_Unitaire.CircuitTestUnitaire;
 
 public class MainAlicia {
